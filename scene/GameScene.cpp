@@ -33,7 +33,7 @@ void GameScene::Initialize()
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 	//音声再生
-	//voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
+	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
 	//ライン描画が参照するビュープロジェクションを指定する(アドレス渡し)
 	PrimitiveDrawer::GetInstance()->SetViewProjection(&viewProjection_);
 	//デバッグカメラの生成
@@ -76,7 +76,6 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
@@ -87,7 +86,7 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-	//sprite_->Draw();
+	sprite_->Draw();
 	//ラインを描画する
 	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, 0}, {10,10,0,},{1.0f,0.0f,0.0f,1.0f});
 
