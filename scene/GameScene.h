@@ -12,13 +12,14 @@
 /// <summary>
 /// ゲームシーン
 /// </summary>
-class GameScene {
-
+class GameScene
+{
 public: // メンバ関数
 	/// <summary>
 	/// コンストクラタ
 	/// </summary>
 	GameScene();
+
 
 	/// <summary>
 	/// デストラクタ
@@ -44,6 +45,10 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	//テクスチャハンドル
+	uint32_t textureHundle_ = 0;
+	//スプライト
+	Sprite *sprite_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

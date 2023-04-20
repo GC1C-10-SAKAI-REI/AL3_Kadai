@@ -4,14 +4,20 @@
 
 GameScene::GameScene(){}
 
-GameScene::~GameScene(){}
+GameScene::~GameScene()
+{
+	delete sprite_;
+}
 
 void GameScene::Initialize()
 {
-
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+	//ファイル名を指定してテクスチャを読み込む
+	textureHundle_ = TextureManager::Load("sample.png");
+	//スプライトの生成
+	sprite_ = Sprite::Create(textureHundle_, {45, 50});
 }
 
 void GameScene::Update(){}
@@ -55,6 +61,7 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+	sprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
