@@ -33,7 +33,7 @@ void GameScene::Initialize()
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 	//音声再生
-	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
+	//voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
 	//ライン描画が参照するビュープロジェクションを指定する(アドレス渡し)
 	PrimitiveDrawer::GetInstance()->SetViewProjection(&viewProjection_);
 	//デバッグカメラの生成
