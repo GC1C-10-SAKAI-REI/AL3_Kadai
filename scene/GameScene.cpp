@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include <cassert>
 #include "ImGuiManager.h"
+#include "PrimitiveDrawer.h"
 
 GameScene::GameScene(){}
 
@@ -31,6 +32,8 @@ void GameScene::Initialize()
 	viewProjection_.Initialize();
 	//音声再生
 	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
+	//ライン描画が参照するビュープロジェクションを指定する(アドレス渡し)
+	PrimitiveDrawer::GetInstance()->SetViewProjection(&viewProjection_);
 }
 
 void GameScene::Update()
@@ -74,7 +77,9 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
+	//ラインを描画する
 	sprite_->Draw();
+	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, 0}, {10,10,0,},{1.0f,0.0f,0.0f,1.0f});
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
