@@ -18,6 +18,8 @@ void GameScene::Initialize()
 	//ファイル名を指定してテクスチャを読み込む
 	textureHundle_ = TextureManager::Load("sample.png");
 	modelHundle_ = TextureManager::Load("uvChecker.png");
+	//サウンドデータの読み込み
+	soundDataHundle_ = audio_->LoadWave("fanfare.wav");
 	//スプライトの生成
 	sprite_ = Sprite::Create(textureHundle_, {45, 50});
 	//3Dモデルの生成
@@ -26,6 +28,9 @@ void GameScene::Initialize()
 	worldTransform_.Initialize();
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
+	//音声再生
+	//audio_->PlayWave(soundDataHundle_);
+	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
 }
 
 void GameScene::Update()
@@ -37,6 +42,12 @@ void GameScene::Update()
 	position.y += 1.0f;
 	//移動した座標をスプライトに反映
 	sprite_->SetPosition(position);
+	//スペースキーを押した瞬間
+	if (input_->TriggerKey(DIK_SPACE))
+	{
+		//音声停止
+		audio_->StopWave(voiceHundle_);
+	}
 }
 
 void GameScene::Draw()
