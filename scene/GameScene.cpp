@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "TextureManager.h"
 #include <cassert>
+#include "ImGuiManager.h"
 
 GameScene::GameScene(){}
 
@@ -47,6 +48,17 @@ void GameScene::Update()
 		//音声停止
 		audio_->StopWave(voiceHundle_);
 	}
+	//ウィンドウの作成
+	ImGui::Begin("Debug1");
+	// デバッグテキストの表示
+	ImGui::Text("Sakai Rei %d.%d.%d", 2023, 04, 20);
+	//float3入力ボックス
+	ImGui::InputFloat3("InputFloat3", inputFloat3);
+	//float3スライダー
+	ImGui::SliderFloat3("SliderFloat3", inputFloat3, 0.0f, 1.0f);
+	ImGui::End();
+	//デモウィンドウの表示を有効化
+	ImGui::ShowDemoWindow();
 }
 
 void GameScene::Draw()
