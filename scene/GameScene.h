@@ -46,9 +46,15 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	//テクスチャハンドル
-	uint32_t textureHundle_ = 0;
+	uint32_t textureHundle_ = 0;//uintは1年で言うint型
+	uint32_t modelHundle_ = 0;
 	//スプライト
 	Sprite *sprite_ = nullptr;
+	Model *model_ = nullptr;
+	//ワールドトランスフォーム
+	WorldTransform worldTransform_;
+	//ビュープロジェクション
+	ViewProjection viewProjection_;
 
 	/// <summary>
 	/// ゲームシーン用

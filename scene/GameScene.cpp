@@ -7,6 +7,7 @@ GameScene::GameScene(){}
 GameScene::~GameScene()
 {
 	delete sprite_;
+	delete model_;
 }
 
 void GameScene::Initialize()
@@ -16,8 +17,15 @@ void GameScene::Initialize()
 	audio_ = Audio::GetInstance();
 	//ファイル名を指定してテクスチャを読み込む
 	textureHundle_ = TextureManager::Load("sample.png");
+	modelHundle_ = TextureManager::Load("uvChecker.png");
 	//スプライトの生成
 	sprite_ = Sprite::Create(textureHundle_, {45, 50});
+	//3Dモデルの生成
+	model_ = Model::Create();
+	//ワールドトランスフォームの初期化
+	worldTransform_.Initialize();
+	//ビュープロジェクションの初期化
+	viewProjection_.Initialize();
 }
 
 void GameScene::Update()
@@ -59,6 +67,7 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+	model_->Draw(worldTransform_, viewProjection_, modelHundle_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
