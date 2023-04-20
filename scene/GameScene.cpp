@@ -10,6 +10,7 @@ GameScene::~GameScene()
 {
 	delete sprite_;
 	delete model_;
+	delete debugCamera_;
 }
 
 void GameScene::Initialize()
@@ -34,6 +35,8 @@ void GameScene::Initialize()
 	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
 	//ライン描画が参照するビュープロジェクションを指定する(アドレス渡し)
 	PrimitiveDrawer::GetInstance()->SetViewProjection(&viewProjection_);
+	//デバッグカメラの生成
+	debugCamera_ = new DebugCamera(1280, 720);
 }
 
 void GameScene::Update()
@@ -62,6 +65,8 @@ void GameScene::Update()
 	ImGui::End();
 	//デモウィンドウの表示を有効化
 	ImGui::ShowDemoWindow();
+	//デバッグカメラの更新
+	debugCamera_->Update();
 }
 
 void GameScene::Draw()
@@ -77,8 +82,8 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
+	//sprite_->Draw();
 	//ラインを描画する
-	sprite_->Draw();
 	PrimitiveDrawer::GetInstance()->DrawLine3d({0, 0, 0}, {10,10,0,},{1.0f,0.0f,0.0f,1.0f});
 
 	// スプライト描画後処理
@@ -94,7 +99,7 @@ void GameScene::Draw()
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-	model_->Draw(worldTransform_, viewProjection_, modelHundle_);
+	model_->Draw(worldTransform_, debugCamera_->GetViewProjection(), modelHundle_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
