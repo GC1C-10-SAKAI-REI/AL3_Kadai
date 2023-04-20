@@ -51,9 +51,9 @@ private: // メンバ変数
 	//スプライト
 	Sprite *sprite_ = nullptr;
 	Model *model_ = nullptr;
-	//ワールドトランスフォーム
+	//ワールドトランスフォーム(3Dモデルのアフィン行列)
 	WorldTransform worldTransform_;
-	//ビュープロジェクション
+	//ビュープロジェクション(カメラ)
 	ViewProjection viewProjection_;
 	//サウンドデータハンドル
 	uint32_t soundDataHundle_ = 0;

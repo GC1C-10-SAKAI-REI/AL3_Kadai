@@ -29,7 +29,6 @@ void GameScene::Initialize()
 	//ビュープロジェクションの初期化
 	viewProjection_.Initialize();
 	//音声再生
-	//audio_->PlayWave(soundDataHundle_);
 	voiceHundle_ = audio_->PlayWave(soundDataHundle_, true);
 }
 
