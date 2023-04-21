@@ -19,7 +19,13 @@ private://メンバ変数
 	// ゲームシーン用
 	uint32_t bgTexHundle_ = 0;
 	Sprite *spriteBG_ = nullptr;
-	
+	// ビュープロジェクション(共通)
+	ViewProjection viewProjection_;
+
+	// ステージ
+	uint32_t texHundleStage_ = 0;
+	Model* stageModel_ = nullptr;
+	WorldTransform stageWorldTransform_;
 
 public://メンバ関数
 	//コンストラクタ

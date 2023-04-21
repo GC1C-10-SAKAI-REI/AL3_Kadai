@@ -12,6 +12,7 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	delete spriteBG_;
+	delete stageModel_;
 }
 
 //初期化
@@ -22,8 +23,18 @@ void GameScene::Initialize()
 	audio_ = Audio::GetInstance();
 	//ここから
 
+	//BG(2Dスプライト)
 	bgTexHundle_ = TextureManager::Load("bg.jpg");	
 	spriteBG_ = Sprite::Create(bgTexHundle_, {0, 0});
+	//ビュープロジェクションの初期化
+	viewProjection_.translation_.y = 1;
+	viewProjection_.translation_.z = -6;
+	viewProjection_.Initialize();
+
+	//ステージ
+	texHundleStage_ = TextureManager::Load("stage.jpg");
+	stageModel_ = Model::Create();
+	stageWorldTransform_.Initialize();
 
 	//ここまで
 }
@@ -62,7 +73,7 @@ void GameScene::Draw()
 
 	//ここから
 
-
+	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
 
 	//ここまで
 
