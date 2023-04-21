@@ -16,6 +16,10 @@ private://メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	// ゲームシーン用
+	uint32_t bgTexHundle_ = 0;
+	Sprite *spriteBG_ = nullptr;
+	
 
 public://メンバ関数
 	//コンストラクタ

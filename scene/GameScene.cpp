@@ -11,7 +11,7 @@ GameScene::GameScene()
 //デストラクタ
 GameScene::~GameScene()
 {
-
+	delete spriteBG_;
 }
 
 //初期化
@@ -20,6 +20,12 @@ void GameScene::Initialize()
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+	//ここから
+
+	bgTexHundle_ = TextureManager::Load("bg.jpg");	
+	spriteBG_ = Sprite::Create(bgTexHundle_, {0, 0});
+
+	//ここまで
 }
 
 //更新
@@ -38,9 +44,11 @@ void GameScene::Draw()
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(commandList);
 
-	/// <summary>
-	/// ここに背景スプライトの描画処理を追加できる
-	/// </summary>
+	//ここから
+
+	spriteBG_->Draw();
+
+	//ここまで
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
@@ -52,9 +60,11 @@ void GameScene::Draw()
 	// 3Dオブジェクト描画前処理
 	Model::PreDraw(commandList);
 
-	/// <summary>
-	/// ここに3Dオブジェクトの描画処理を追加できる
-	/// </summary>
+	//ここから
+
+
+
+	//ここまで
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
@@ -64,9 +74,11 @@ void GameScene::Draw()
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(commandList);
 
-	/// <summary>
-	/// ここに前景スプライトの描画処理を追加できる
-	/// </summary>
+	//ここから
+
+
+
+	//ここまで
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
