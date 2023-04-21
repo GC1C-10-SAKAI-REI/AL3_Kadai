@@ -9,43 +9,30 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 
-/// <summary>
-/// ゲームシーン
-/// </summary>
+//ゲームシーン
 class GameScene
 {
-public: // メンバ関数
-	/// <summary>
-	/// コンストクラタ
-	/// </summary>
+private://メンバ変数
+	DirectXCommon *dxCommon_ = nullptr;
+	Input *input_ = nullptr;
+	Audio *audio_ = nullptr;
+
+	// ゲームシーン用
+
+
+public://メンバ関数	
+	//コンストクラタ	
 	GameScene();
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
+	
+	//デストラクタ	
 	~GameScene();
-
-	/// <summary>
-	/// 初期化
-	/// </summary>
+	
+	//初期化	
 	void Initialize();
-
-	/// <summary>
-	/// 毎フレーム処理
-	/// </summary>
+	
+	//更新処理
 	void Update();
-
-	/// <summary>
-	/// 描画
-	/// </summary>
+	
+	//描画処理
 	void Draw();
-
-private: // メンバ変数
-	DirectXCommon* dxCommon_ = nullptr;
-	Input* input_ = nullptr;
-	Audio* audio_ = nullptr;
-
-	/// <summary>
-	/// ゲームシーン用
-	/// </summary>
 };
