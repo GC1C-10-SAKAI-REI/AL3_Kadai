@@ -2,23 +2,35 @@
 #include "TextureManager.h"
 #include <cassert>
 
-GameScene::GameScene(){}
-
-GameScene::~GameScene(){}
-
-void GameScene::Initialize()
+//コンストラクタ
+GameScene::GameScene()
 {
 
+}
+
+//デストラクタ
+GameScene::~GameScene()
+{
+
+}
+
+//初期化
+void GameScene::Initialize()
+{
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 }
 
-void GameScene::Update(){}
-
-void GameScene::Draw()
+//更新
+void GameScene::Update()
 {
 
+}
+
+//描画
+void GameScene::Draw()
+{
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 

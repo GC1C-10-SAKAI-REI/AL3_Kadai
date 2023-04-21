@@ -12,8 +12,8 @@
 /// <summary>
 /// ゲームシーン
 /// </summary>
-class GameScene {
-
+class GameScene
+{
 public: // メンバ関数
 	/// <summary>
 	/// コンストクラタ
