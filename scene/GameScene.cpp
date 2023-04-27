@@ -120,6 +120,25 @@ void GameScene::Draw()
 
 void GameScene::PlayerUpdate()
 {
+	//キーによる移動処理
+	if (input_->PushKey(DIK_RIGHT))
+	{
+		playerWorldTransform_.translation_.x += 0.1f;
+	}
+	else if (input_->PushKey(DIK_LEFT))
+	{
+		playerWorldTransform_.translation_.x -= 0.1f;
+	}
+
+	if (playerWorldTransform_.translation_.x < -4)
+	{
+		playerWorldTransform_.translation_.x = -4;
+	}
+	if (playerWorldTransform_.translation_.x > 4)
+	{
+		playerWorldTransform_.translation_.x = 4;
+	}
+
 	//変換行列を更新
 	playerWorldTransform_.matWorld_ = MakeAffineMatrix(
 	    playerWorldTransform_.scale_, 
