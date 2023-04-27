@@ -27,6 +27,11 @@ private://メンバ変数
 	Model* stageModel_ = nullptr;
 	WorldTransform stageWorldTransform_;
 
+	//プレイヤー
+	uint32_t texHundlePlayer_ = 0;
+	Model* playerModel_ = nullptr;
+	WorldTransform playerWorldTransform_;
+
 public://メンバ関数
 	//コンストラクタ
 	GameScene();
@@ -42,4 +47,8 @@ public://メンバ関数
 
 	//描画処理
 	void Draw();
+
+private:
+	void PlayerUpdate();
+
 };

@@ -12,6 +12,7 @@ GameScene::GameScene()
 //デストラクタ
 GameScene::~GameScene()
 {
+	delete playerModel_;
 	delete spriteBG_;
 	delete stageModel_;
 }
@@ -49,13 +50,19 @@ void GameScene::Initialize()
 	//変換行列を定数バッファに転送
 	stageWorldTransform_.TransferMatrix();
 
+	//プレイヤー
+	texHundlePlayer_ = TextureManager::Load("player.png");
+	playerModel_ = Model::Create();
+	playerWorldTransform_.scale_ = {0.5f, 0.5f, 0.5};
+	playerWorldTransform_.Initialize();
+
 	//ここまで
 }
 
 //更新
 void GameScene::Update()
-{
-
+{ 
+	PlayerUpdate(); 
 }
 
 //描画
@@ -87,6 +94,7 @@ void GameScene::Draw()
 	//ここから
 
 	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
+	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
 
 	//ここまで
 
@@ -108,4 +116,15 @@ void GameScene::Draw()
 	Sprite::PostDraw();
 
 #pragma endregion
+}
+
+void GameScene::PlayerUpdate()
+{
+	//変換行列を更新
+	playerWorldTransform_.matWorld_ = MakeAffineMatrix(
+	    playerWorldTransform_.scale_, 
+		playerWorldTransform_.rotation_,
+	    playerWorldTransform_.translation_);
+	//変換行列をバッファに転送
+	playerWorldTransform_.TransferMatrix();
 }
