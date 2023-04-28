@@ -12,8 +12,13 @@ GameScene::GameScene()
 //デストラクタ
 GameScene::~GameScene()
 {
+	//プレイヤー
 	delete playerModel_;
+	//ビーム
+	delete beamModel_;
+	//背景
 	delete spriteBG_;
+	//床
 	delete stageModel_;
 }
 
@@ -25,13 +30,14 @@ void GameScene::Initialize()
 	audio_ = Audio::GetInstance();
 	//ここから
 
-	//BG(2Dスプライト)
-	bgTexHundle_ = TextureManager::Load("bg.jpg");	
-	spriteBG_ = Sprite::Create(bgTexHundle_, {0, 0});
 	//ビュープロジェクションの初期化
 	viewProjection_.translation_.y = 1;
 	viewProjection_.translation_.z = -6;
 	viewProjection_.Initialize();
+
+	//BG(2Dスプライト)
+	bgTexHundle_ = TextureManager::Load("bg.jpg");	
+	spriteBG_ = Sprite::Create(bgTexHundle_, {0, 0});
 
 	//ステージ
 	texHundleStage_ = TextureManager::Load("stage.jpg");
@@ -44,7 +50,7 @@ void GameScene::Initialize()
 	//変換行列を更新
 	stageWorldTransform_.matWorld_ = 
 		MakeAffineMatrix
-		(stageWorldTransform_.scale_, 
+		(stageWorldTransform_.scale_,
 		stageWorldTransform_.rotation_,
 	    stageWorldTransform_.translation_);
 	//変換行列を定数バッファに転送
@@ -53,8 +59,14 @@ void GameScene::Initialize()
 	//プレイヤー
 	texHundlePlayer_ = TextureManager::Load("player.png");
 	playerModel_ = Model::Create();
-	playerWorldTransform_.scale_ = {0.5f, 0.5f, 0.5};
+	playerWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
 	playerWorldTransform_.Initialize();
+
+	//ビーム
+	texHundleBeam_ = TextureManager::Load("beam.png");
+	beamModel_ = Model::Create();
+	beamWorldTransform_.scale_ = {0.3f, 0.3f, 0.3f};
+	beamWorldTransform_.Initialize();
 
 	//ここまで
 }
@@ -62,7 +74,8 @@ void GameScene::Initialize()
 //更新
 void GameScene::Update()
 { 
-	PlayerUpdate(); 
+	PlayerUpdate();
+	BeamUpdate();
 }
 
 //描画
@@ -95,6 +108,7 @@ void GameScene::Draw()
 
 	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
+	beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
 
 	//ここまで
 
@@ -147,3 +161,41 @@ void GameScene::PlayerUpdate()
 	//変換行列をバッファに転送
 	playerWorldTransform_.TransferMatrix();
 }
+
+void GameScene::BeamUpdate()
+{
+	//移動
+	/*if (beamFlag_)
+	{
+		BeamMove();
+	}*/
+
+	// 変換行列を更新
+	beamWorldTransform_.matWorld_ = MakeAffineMatrix(
+	    beamWorldTransform_.scale_, 
+		beamWorldTransform_.rotation_,
+	    beamWorldTransform_.translation_);
+	// 変換行列をバッファに転送
+	beamWorldTransform_.TransferMatrix();
+}
+
+//void GameScene::BeamBorn()
+//{
+//	if (input_->TriggerKey(DIK_SPACE) && beamFlag_ == false)
+//	{
+//		beamWorldTransform_.translation_.x = playerWorldTransform_.translation_.x;
+//		beamWorldTransform_.translation_.y = playerWorldTransform_.translation_.y;
+//		beamFlag_ = true;
+//	}
+//}
+
+//void GameScene::BeamMove()
+//{
+//	beamWorldTransform_.rotation_.x += 0.1f;
+//	beamWorldTransform_.translation_.z += 0.5f;
+//
+//	if (beamWorldTransform_.translation_.z >= 40.0f)
+//	{
+//		beamFlag_ = false;
+//	}
+//}

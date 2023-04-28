@@ -16,11 +16,12 @@ private://メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	// ビュープロジェクション(共通)
+	ViewProjection viewProjection_;
+
 	// ゲームシーン用
 	uint32_t bgTexHundle_ = 0;
 	Sprite *spriteBG_ = nullptr;
-	// ビュープロジェクション(共通)
-	ViewProjection viewProjection_;
 
 	// ステージ
 	uint32_t texHundleStage_ = 0;
@@ -31,6 +32,13 @@ private://メンバ変数
 	uint32_t texHundlePlayer_ = 0;
 	Model* playerModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
+
+	// ビーム
+	uint32_t texHundleBeam_ = 0;
+	Model* beamModel_ = nullptr;
+	WorldTransform beamWorldTransform_;
+	//
+	bool beamFlag_ = false;
 
 public://メンバ関数
 	//コンストラクタ
@@ -49,6 +57,12 @@ public://メンバ関数
 	void Draw();
 
 private:
+	//自機更新
 	void PlayerUpdate();
-
+	//ビーム更新
+	void BeamUpdate();
+	//ビーム発生
+	//void BeamBorn();
+	//ビーム移動
+	//void BeamMove();
 };
