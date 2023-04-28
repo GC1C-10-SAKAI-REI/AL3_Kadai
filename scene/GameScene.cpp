@@ -106,9 +106,15 @@ void GameScene::Draw()
 
 	//ここから
 
+	//床
 	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
+	//プレイヤー
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
-	beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
+	//ビーム
+	if (beamFlag_)
+	{
+		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
+	}	
 
 	//ここまで
 
@@ -164,11 +170,10 @@ void GameScene::PlayerUpdate()
 
 void GameScene::BeamUpdate()
 {
+	//初期化
+	BeamBorn();
 	//移動
-	/*if (beamFlag_)
-	{
-		BeamMove();
-	}*/
+	BeamMove();
 
 	// 変換行列を更新
 	beamWorldTransform_.matWorld_ = MakeAffineMatrix(
@@ -179,23 +184,26 @@ void GameScene::BeamUpdate()
 	beamWorldTransform_.TransferMatrix();
 }
 
-//void GameScene::BeamBorn()
-//{
-//	if (input_->TriggerKey(DIK_SPACE) && beamFlag_ == false)
-//	{
-//		beamWorldTransform_.translation_.x = playerWorldTransform_.translation_.x;
-//		beamWorldTransform_.translation_.y = playerWorldTransform_.translation_.y;
-//		beamFlag_ = true;
-//	}
-//}
+void GameScene::BeamBorn()
+{
+	if (input_->TriggerKey(DIK_SPACE) && !beamFlag_)
+	{
+		beamFlag_ = true;
+		beamWorldTransform_.translation_.x = playerWorldTransform_.translation_.x;
+		beamWorldTransform_.translation_.z = playerWorldTransform_.translation_.z;
+	}
+}
 
-//void GameScene::BeamMove()
-//{
-//	beamWorldTransform_.rotation_.x += 0.1f;
-//	beamWorldTransform_.translation_.z += 0.5f;
-//
-//	if (beamWorldTransform_.translation_.z >= 40.0f)
-//	{
-//		beamFlag_ = false;
-//	}
-//}
+void GameScene::BeamMove()
+{
+	if (beamFlag_)
+	{
+		beamWorldTransform_.translation_.z += 0.5f;
+		beamWorldTransform_.rotation_.x += 0.1f;
+	}
+
+	if (beamWorldTransform_.translation_.z >= 40.0f)
+	{
+		beamFlag_ = false;
+	}
+}

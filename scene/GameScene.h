@@ -62,7 +62,7 @@ private:
 	//ビーム更新
 	void BeamUpdate();
 	//ビーム発生
-	//void BeamBorn();
+	void BeamBorn();
 	//ビーム移動
-	//void BeamMove();
+	void BeamMove();
 };
