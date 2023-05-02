@@ -44,20 +44,17 @@ private://メンバ変数
 	uint32_t texHundleEnemy_ = 0;
 	Model* enemyModel_ = nullptr;
 	WorldTransform enemyWorldTransform_;
+	bool enemyAlive = true;
 
 public://メンバ関数
 	//コンストラクタ
 	GameScene();
-
 	//デストラクタ
 	~GameScene();
-
 	//初期化処理
 	void Initialize();
-
 	//更新処理
 	void Update();
-
 	//描画処理
 	void Draw();
 
@@ -70,4 +67,10 @@ private:
 	void BeamBorn();
 	//ビーム移動
 	void BeamMove();
+	//敵の更新
+	void EnemyUpdate();
+	//敵の発生
+	void EnemyBorn();
+	//敵の移動
+	void EnemyMove();
 };

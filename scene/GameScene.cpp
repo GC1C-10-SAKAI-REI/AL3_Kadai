@@ -84,6 +84,7 @@ void GameScene::Update()
 { 
 	PlayerUpdate();
 	BeamUpdate();
+	EnemyUpdate();
 }
 
 //描画
@@ -184,7 +185,7 @@ void GameScene::BeamUpdate()
 	//移動
 	BeamMove();
 
-	// 変換行列を更新
+	//変換行列を更新
 	beamWorldTransform_.matWorld_ = MakeAffineMatrix(
 	    beamWorldTransform_.scale_, 
 		beamWorldTransform_.rotation_,
@@ -214,5 +215,41 @@ void GameScene::BeamMove()
 	if (beamWorldTransform_.translation_.z >= 40.0f)
 	{
 		beamFlag_ = false;
+	}
+}
+
+void GameScene::EnemyUpdate()
+{
+	EnemyBorn();
+	EnemyMove();
+
+	// 変換行列を更新
+	enemyWorldTransform_.matWorld_ = MakeAffineMatrix(
+	    enemyWorldTransform_.scale_, 
+		enemyWorldTransform_.rotation_,
+	    enemyWorldTransform_.translation_);
+	// 変換行列をバッファに転送
+	enemyWorldTransform_.TransferMatrix();
+}
+
+void GameScene::EnemyBorn()
+{
+	if (!enemyAlive)
+	{
+		enemyAlive = true;
+		enemyWorldTransform_.translation_.z = 40;
+	}
+}
+
+void GameScene::EnemyMove()
+{
+	if (enemyAlive)
+	{
+		enemyWorldTransform_.translation_.z -= 0.1f;
+
+		if (enemyWorldTransform_.translation_.z < -5)
+		{
+			enemyAlive = false;
+		}
 	}
 }
