@@ -37,8 +37,13 @@ private://メンバ変数
 	uint32_t texHundleBeam_ = 0;
 	Model* beamModel_ = nullptr;
 	WorldTransform beamWorldTransform_;
-	//
+	//ビーム管理フラグ
 	bool beamFlag_ = false;
+
+	//敵
+	uint32_t texHundleEnemy_ = 0;
+	Model* enemyModel_ = nullptr;
+	WorldTransform enemyWorldTransform_;
 
 public://メンバ関数
 	//コンストラクタ

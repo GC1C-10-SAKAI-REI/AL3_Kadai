@@ -16,6 +16,8 @@ GameScene::~GameScene()
 	delete playerModel_;
 	//ビーム
 	delete beamModel_;
+	//敵
+	delete enemyModel_;
 	//背景
 	delete spriteBG_;
 	//床
@@ -68,6 +70,12 @@ void GameScene::Initialize()
 	beamWorldTransform_.scale_ = {0.3f, 0.3f, 0.3f};
 	beamWorldTransform_.Initialize();
 
+	//敵
+	texHundleEnemy_ = TextureManager::Load("enemy.png");
+	enemyModel_ = Model::Create();
+	enemyWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
+	enemyWorldTransform_.Initialize();
+
 	//ここまで
 }
 
@@ -114,7 +122,8 @@ void GameScene::Draw()
 	if (beamFlag_)
 	{
 		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
-	}	
+	}
+	enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
 
 	//ここまで
 
