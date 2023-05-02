@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include <time.h>
 
 //ゲームシーン
 class GameScene
@@ -44,7 +45,7 @@ private://メンバ変数
 	uint32_t texHundleEnemy_ = 0;
 	Model* enemyModel_ = nullptr;
 	WorldTransform enemyWorldTransform_;
-	bool enemyAlive = true;
+	bool enemyAlive = false;
 
 public://メンバ関数
 	//コンストラクタ

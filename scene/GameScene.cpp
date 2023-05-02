@@ -76,6 +76,8 @@ void GameScene::Initialize()
 	enemyWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
 	enemyWorldTransform_.Initialize();
 
+	srand((unsigned int)time(NULL));
+
 	//ここまで
 }
 
@@ -124,7 +126,10 @@ void GameScene::Draw()
 	{
 		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
 	}
-	enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
+	if (enemyAlive)
+	{
+		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
+	}
 
 	//ここまで
 
@@ -197,7 +202,7 @@ void GameScene::BeamUpdate()
 void GameScene::BeamBorn()
 {
 	if (input_->TriggerKey(DIK_SPACE) && !beamFlag_)
-	{
+	{		
 		beamFlag_ = true;
 		beamWorldTransform_.translation_.x = playerWorldTransform_.translation_.x;
 		beamWorldTransform_.translation_.z = playerWorldTransform_.translation_.z;
@@ -236,6 +241,10 @@ void GameScene::EnemyBorn()
 {
 	if (!enemyAlive)
 	{
+		//乱数でX座標の指定
+		int x = rand() % 80;
+		float x2 = (float)x / 10 - 4;
+		enemyWorldTransform_.translation_.x = x2;
 		enemyAlive = true;
 		enemyWorldTransform_.translation_.z = 40;
 	}
@@ -245,7 +254,8 @@ void GameScene::EnemyMove()
 {
 	if (enemyAlive)
 	{
-		enemyWorldTransform_.translation_.z -= 0.1f;
+		enemyWorldTransform_.translation_.z -= 0.3f;
+		enemyWorldTransform_.rotation_.z += 0.2f;
 
 		if (enemyWorldTransform_.translation_.z < -5)
 		{
