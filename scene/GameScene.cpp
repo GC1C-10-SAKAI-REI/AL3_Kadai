@@ -76,7 +76,12 @@ void GameScene::Initialize()
 	enemyWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
 	enemyWorldTransform_.Initialize();
 
+	//乱数
 	srand((unsigned int)time(NULL));
+
+	//デバッグテキスト
+	debugText_ = DebugText::GetInstance();
+	debugText_->Initialize();
 
 	//ここまで
 }
@@ -148,7 +153,8 @@ void GameScene::Draw()
 
 	//ここから
 
-
+	debugText_->Print("AAA", 10, 10, 2);
+	debugText_->DrawAll();
 
 	//ここまで
 
@@ -291,7 +297,7 @@ void GameScene::CollisionPtoE()
 	}
 }
 
-//void GameScene::CollisionBtoE()
-//{
-//
-//}
+void GameScene::CollisionBtoE()
+{
+
+}
