@@ -153,9 +153,12 @@ void GameScene::Draw()
 
 	//ここから
 
-	char str[100];
-	sprintf_s(str, "SCORE : %d", gamrScore_);
-	debugText_->Print(str, 200, 10, 2);
+	char score[100];
+	char life[10];
+	sprintf_s(score, "SCORE : %d", gamrScore_);
+	sprintf_s(life, "LIFE : %d", playerLife_);
+	debugText_->Print(score, 200, 10, 2);
+	debugText_->Print(life, 840, 10, 2);
 	debugText_->DrawAll();
 
 	//ここまで
@@ -295,6 +298,10 @@ void GameScene::CollisionPtoE()
 		//衝突したら
 		if (dx < 1 && dz < 1)
 		{
+			if (playerLife_ > 0)
+			{
+				playerLife_ -= 1;
+			}			
 			enemyAlive_ = false;
 		}
 	}
