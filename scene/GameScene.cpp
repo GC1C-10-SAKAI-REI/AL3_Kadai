@@ -136,7 +136,7 @@ void GameScene::Draw()
 	{
 		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
 	}
-	if (enemyAlive)
+	if (enemyAlive_)
 	{
 		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
 	}
@@ -153,7 +153,9 @@ void GameScene::Draw()
 
 	//ここから
 
-	debugText_->Print("AAA", 10, 10, 2);
+	char str[100];
+	sprintf_s(str, "SCORE : %d", gamrScore_);
+	debugText_->Print(str, 200, 10, 2);
 	debugText_->DrawAll();
 
 	//ここまで
@@ -250,27 +252,27 @@ void GameScene::EnemyUpdate()
 
 void GameScene::EnemyBorn()
 {
-	if (!enemyAlive)
+	if (!enemyAlive_)
 	{
 		//乱数でX座標の指定
 		int x = rand() % 80;
 		float x2 = (float)x / 10 - 4;
 		enemyWorldTransform_.translation_.x = x2;
-		enemyAlive = true;
+		enemyAlive_ = true;
 		enemyWorldTransform_.translation_.z = 40;
 	}
 }
 
 void GameScene::EnemyMove()
 {
-	if (enemyAlive)
+	if (enemyAlive_)
 	{
 		enemyWorldTransform_.translation_.z -= 0.3f;
 		enemyWorldTransform_.rotation_.z += 0.2f;
 
 		if (enemyWorldTransform_.translation_.z < -5)
 		{
-			enemyAlive = false;
+			enemyAlive_ = false;
 		}
 	}
 }
@@ -278,12 +280,13 @@ void GameScene::EnemyMove()
 void GameScene::Collision()
 {
 	CollisionPtoE();
+	CollisionBtoE();
 }
 
 void GameScene::CollisionPtoE()
 {
 	//敵が生きていれば
-	if (enemyAlive)
+	if (enemyAlive_)
 	{
 		//差を求める
 		float dx = abs(playerWorldTransform_.translation_.x - enemyWorldTransform_.translation_.x);
@@ -292,12 +295,26 @@ void GameScene::CollisionPtoE()
 		//衝突したら
 		if (dx < 1 && dz < 1)
 		{
-			enemyAlive = false;
+			enemyAlive_ = false;
 		}
 	}
 }
 
 void GameScene::CollisionBtoE()
 {
+	// 敵が生きていれば
+	if (enemyAlive_ && beamFlag_)
+	{
+		// 差を求める
+		float dx = abs(beamWorldTransform_.translation_.x - enemyWorldTransform_.translation_.x);
+		float dz = abs(beamWorldTransform_.translation_.z - enemyWorldTransform_.translation_.z);
 
+		// 衝突したら
+		if (dx < 1 && dz < 1)
+		{
+			gamrScore_ += 10;
+			enemyAlive_ = false;
+			beamFlag_ = false;
+		}
+	}
 }

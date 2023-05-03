@@ -46,9 +46,11 @@ private://メンバ変数
 	uint32_t texHundleEnemy_ = 0;
 	Model *enemyModel_ = nullptr;
 	WorldTransform enemyWorldTransform_;
-	bool enemyAlive = false;
+	bool enemyAlive_ = false;
 
+	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
+	int gamrScore_ = 0;
 
 public://メンバ関数
 	//コンストラクタ
