@@ -83,10 +83,15 @@ void GameScene::Initialize()
 
 //更新
 void GameScene::Update()
-{ 
+{
+	//プレイヤー
 	PlayerUpdate();
+	//ビーム
 	BeamUpdate();
+	//エネミー
 	EnemyUpdate();
+	//当たり判定
+	Collision();
 }
 
 //描画
@@ -263,3 +268,30 @@ void GameScene::EnemyMove()
 		}
 	}
 }
+
+void GameScene::Collision()
+{
+	CollisionPtoE();
+}
+
+void GameScene::CollisionPtoE()
+{
+	//敵が生きていれば
+	if (enemyAlive)
+	{
+		//差を求める
+		float dx = abs(playerWorldTransform_.translation_.x - enemyWorldTransform_.translation_.x);
+		float dz = abs(playerWorldTransform_.translation_.z - enemyWorldTransform_.translation_.z);
+
+		//衝突したら
+		if (dx < 1 && dz < 1)
+		{
+			enemyAlive = false;
+		}
+	}
+}
+
+//void GameScene::CollisionBtoE()
+//{
+//
+//}

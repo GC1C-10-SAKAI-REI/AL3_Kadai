@@ -74,4 +74,10 @@ private:
 	void EnemyBorn();
 	//敵の移動
 	void EnemyMove();
+	//衝突判定
+	void Collision();
+	//衝突判定(自機と敵)
+	void CollisionPtoE();
+	//衝突判定(ビームと敵)
+	//void CollisionBtoE();
 };
