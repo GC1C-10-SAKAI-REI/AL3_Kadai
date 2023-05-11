@@ -89,14 +89,7 @@ void GameScene::Initialize()
 //更新
 void GameScene::Update()
 {
-	//プレイヤー
-	PlayerUpdate();
-	//ビーム
-	BeamUpdate();
-	//エネミー
-	EnemyUpdate();
-	//当たり判定
-	Collision();
+	GamePlayUpdate();
 }
 
 //描画
@@ -111,7 +104,7 @@ void GameScene::Draw()
 
 	//ここから
 
-	spriteBG_->Draw();
+	GamePlayDraw2DBack();
 
 	//ここまで
 
@@ -127,19 +120,7 @@ void GameScene::Draw()
 
 	//ここから
 
-	//床
-	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
-	//プレイヤー
-	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
-	//ビーム
-	if (beamFlag_)
-	{
-		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
-	}
-	if (enemyAlive_)
-	{
-		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
-	}
+	GamePlayDraw3D();
 
 	//ここまで
 
@@ -153,12 +134,7 @@ void GameScene::Draw()
 
 	//ここから
 
-	char score[100];
-	char life[10];
-	sprintf_s(score, "SCORE : %d", gamrScore_);
-	sprintf_s(life, "LIFE : %d", playerLife_);
-	debugText_->Print(score, 200, 10, 2);
-	debugText_->Print(life, 840, 10, 2);
+	GamePlayDraw2DNear();
 	debugText_->DrawAll();
 
 	//ここまで
@@ -324,4 +300,49 @@ void GameScene::CollisionBtoE()
 			beamFlag_ = false;
 		}
 	}
+}
+
+void GameScene::GamePlayUpdate()
+{
+	// プレイヤー
+	PlayerUpdate();
+	// ビーム
+	BeamUpdate();
+	// エネミー
+	EnemyUpdate();
+	// 当たり判定
+	Collision();
+}
+
+void GameScene::GamePlayDraw3D()
+{
+	// 床
+	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
+	// プレイヤー
+	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
+	// ビーム
+	if (beamFlag_) {
+		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
+	}
+	//敵
+	if (enemyAlive_) {
+		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
+	}
+}
+
+void GameScene::GamePlayDraw2DBack()
+{
+	spriteBG_->Draw();
+}
+
+void GameScene::GamePlayDraw2DNear()
+{
+	//ゲームスコア
+	char score[100];
+	sprintf_s(score, "SCORE : %d", gamrScore_);
+	debugText_->Print(score, 200, 10, 2);
+	//ライフ
+	char life[10];
+	sprintf_s(life, "LIFE : %d", playerLife_);
+	debugText_->Print(life, 840, 10, 2);
 }

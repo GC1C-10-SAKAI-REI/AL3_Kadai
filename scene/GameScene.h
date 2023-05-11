@@ -86,4 +86,12 @@ private:
 	void CollisionPtoE();
 	//衝突判定(ビームと敵)
 	void CollisionBtoE();
+	//ゲームプレイ更新
+	void GamePlayUpdate();
+	// ゲームプレイ3D表示
+	void GamePlayDraw3D();
+	// ゲームプレイ背景2D表示
+	void GamePlayDraw2DBack();
+	// ゲームプレイ近景2D表示
+	void GamePlayDraw2DNear();
 };
