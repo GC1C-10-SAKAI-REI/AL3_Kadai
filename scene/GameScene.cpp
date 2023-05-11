@@ -112,156 +112,109 @@ void GameScene::Draw()
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
+	#pragma region 背景スプライト描画
+	// 背景スプライト描画前処理
+	Sprite::PreDraw(commandList);
+
+	// ここから
+
 	switch (scene)
 	{
 	case GameScene::TITLE_:
 
-		#pragma region 背景スプライト描画
-		// 背景スプライト描画前処理
-		Sprite::PreDraw(commandList);
 
-		// ここから
-
-		
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-		// 深度バッファクリア
-		dxCommon_->ClearDepthBuffer();
-#pragma endregion
-
-#pragma region 3Dオブジェクト描画
-		// 3Dオブジェクト描画前処理
-		Model::PreDraw(commandList);
-
-		// ここから
-
-		
-
-		// ここまで
-
-		// 3Dオブジェクト描画後処理
-		Model::PostDraw();
-#pragma endregion
-
-#pragma region 前景スプライト描画
-		// 前景スプライト描画前処理
-		Sprite::PreDraw(commandList);
-
-		// ここから
-
-		debugText_->DrawAll();
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-
-#pragma endregion
 
 		break;
 
 	case GameScene::GAMEPLAY_:
 
-		#pragma region 背景スプライト描画
-		// 背景スプライト描画前処理
-		Sprite::PreDraw(commandList);
-
-		// ここから
-
 		GamePlayDraw2DBack();
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-		// 深度バッファクリア
-		dxCommon_->ClearDepthBuffer();
-#pragma endregion
-
-#pragma region 3Dオブジェクト描画
-		// 3Dオブジェクト描画前処理
-		Model::PreDraw(commandList);
-
-		// ここから
-
-		GamePlayDraw3D();
-
-		// ここまで
-
-		// 3Dオブジェクト描画後処理
-		Model::PostDraw();
-#pragma endregion
-
-#pragma region 前景スプライト描画
-		// 前景スプライト描画前処理
-		Sprite::PreDraw(commandList);
-
-		// ここから
-
-		GamePlayDraw2DNear();
-		debugText_->DrawAll();
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-
-#pragma endregion
 
 		break;
 
 	case GameScene::GAMEOVER_:
 
-		#pragma region 背景スプライト描画
-		// 背景スプライト描画前処理
-		Sprite::PreDraw(commandList);
 
-		// ここから
-
-		
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-		// 深度バッファクリア
-		dxCommon_->ClearDepthBuffer();
-#pragma endregion
-
-#pragma region 3Dオブジェクト描画
-		// 3Dオブジェクト描画前処理
-		Model::PreDraw(commandList);
-
-		// ここから
-
-		
-
-		// ここまで
-
-		// 3Dオブジェクト描画後処理
-		Model::PostDraw();
-#pragma endregion
-
-#pragma region 前景スプライト描画
-		// 前景スプライト描画前処理
-		Sprite::PreDraw(commandList);
-
-		// ここから
-
-		debugText_->DrawAll();
-
-		// ここまで
-
-		// スプライト描画後処理
-		Sprite::PostDraw();
-
-#pragma endregion
 
 		break;
 	}
+
+	// ここまで
+
+	// スプライト描画後処理
+	Sprite::PostDraw();
+	// 深度バッファクリア
+	dxCommon_->ClearDepthBuffer();
+#pragma endregion
+
+#pragma region 3Dオブジェクト描画
+	// 3Dオブジェクト描画前処理
+	Model::PreDraw(commandList);
+
+	// ここから
+
+	switch (scene)
+	{
+	case GameScene::TITLE_:
+
+
+
+		break;
+
+	case GameScene::GAMEPLAY_:
+
+		GamePlayDraw3D();
+
+		break;
+
+	case GameScene::GAMEOVER_:
+
+
+
+		break;
+	}
+
+	// ここまで
+
+	// 3Dオブジェクト描画後処理
+	Model::PostDraw();
+#pragma endregion
+
+#pragma region 前景スプライト描画
+	// 前景スプライト描画前処理
+	Sprite::PreDraw(commandList);
+
+	// ここから
+
+	switch (scene)
+	{
+	case GameScene::TITLE_:
+
+
+
+		break;
+
+	case GameScene::GAMEPLAY_:
+
+		GamePlayDraw2DNear();
+
+		break;
+
+	case GameScene::GAMEOVER_:
+
+
+
+		break;
+	}
+	
+	debugText_->DrawAll();
+
+	// ここまで
+
+	// スプライト描画後処理
+	Sprite::PostDraw();
+
+#pragma endregion
 }
 
 void GameScene::PlayerUpdate()
