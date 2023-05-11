@@ -61,12 +61,22 @@ private://メンバ変数
 	DebugText *debugText_ = nullptr;
 	int gamrScore_ = 0;	
 
-	//タイトル(スプライト)
+	//タイトル
 	uint32_t texHundleTitle_ = 0;
 	Sprite *titleSprite = nullptr;
 
+	//シーン進行案内
+	uint32_t texHundleEnter_ = 0;
+	Sprite *enterSprite = nullptr;
+
+	//ゲームオーバー
+	uint32_t texHundleGameover_ = 0;
+	Sprite *gameoverSprite = nullptr;
+
 	//シーン管理用変数
 	Scene scene = TITLE_;
+
+	int gameTimer_ = 0;
 
 public://メンバ関数
 	//コンストラクタ
@@ -113,4 +123,8 @@ private:
 	void GamePlayDraw2DBack();
 	// ゲームプレイ近景2D表示
 	void GamePlayDraw2DNear();
+	// ゲームオーバー更新
+	void GameoverUpdate();
+	// ゲームオーバー2D
+	void GameoverDraw2DNear();
 };

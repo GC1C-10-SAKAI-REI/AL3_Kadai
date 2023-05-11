@@ -24,6 +24,10 @@ GameScene::~GameScene()
 	delete stageModel_;
 	//タイトル
 	delete titleSprite;
+	//
+	delete enterSprite;
+	//
+	delete gameoverSprite;
 }
 
 //初期化
@@ -82,6 +86,14 @@ void GameScene::Initialize()
 	texHundleTitle_ = TextureManager::Load("title.png");
 	titleSprite = Sprite::Create(texHundleTitle_, {0, 0});
 
+	//エンター
+	texHundleEnter_ = TextureManager::Load("enter.png");
+	enterSprite = Sprite::Create(texHundleEnter_, {400, 360,});
+
+	//ゲームオーバー
+	texHundleGameover_ = TextureManager::Load("gameover.png");
+	gameoverSprite = Sprite::Create(texHundleGameover_, {0, 360});
+
 	//乱数
 	srand((unsigned int)time(NULL));
 
@@ -98,14 +110,20 @@ void GameScene::Update()
 	switch (scene)
 	{
 	case TITLE_:
+
 		TitleUpdate();
+
 		break;
 
 	case GAMEPLAY_:
+
 		GamePlayUpdate();
+
 		break;
 
 	case GAMEOVER_:
+
+		GameoverUpdate();
 
 		break;
 	}
@@ -139,7 +157,7 @@ void GameScene::Draw()
 
 	case GAMEOVER_:
 
-
+		GamePlayDraw2DBack();
 
 		break;
 	}
@@ -174,7 +192,7 @@ void GameScene::Draw()
 
 	case GAMEOVER_:
 
-
+		GamePlayDraw3D();
 
 		break;
 	}
@@ -207,7 +225,7 @@ void GameScene::Draw()
 
 	case GAMEOVER_:
 
-
+		GameoverDraw2DNear();
 
 		break;
 	}
@@ -381,12 +399,23 @@ void GameScene::CollisionBtoE()
 
 void GameScene::TitleUpdate()
 {
+	gameTimer_++;
 
+	if (input_->TriggerKey(DIK_RETURN))
+	{
+		scene = GAMEPLAY_;
+	}
 }
 
 void GameScene::TitleDraw2DNear()
 {
 	titleSprite->Draw();
+
+	//エンター表示
+	if (gameTimer_ % 40 >= 20)
+	{
+		enterSprite->Draw();
+	}
 }
 
 void GameScene::GamePlayUpdate()
@@ -399,6 +428,11 @@ void GameScene::GamePlayUpdate()
 	EnemyUpdate();
 	// 当たり判定
 	Collision();
+
+	if (playerLife_ < 1)
+	{
+		scene = GAMEOVER_;
+	}
 }
 
 void GameScene::GamePlayDraw3D()
@@ -434,4 +468,17 @@ void GameScene::GamePlayDraw2DNear()
 	char life[10];
 	sprintf_s(life, "LIFE : %d", playerLife_);
 	debugText_->Print(life, 840, 10, 2);
+}
+
+void GameScene::GameoverUpdate()
+{
+	if (input_->TriggerKey(DIK_RETURN))
+	{
+		scene = TITLE_;
+	}
+}
+
+void GameScene::GameoverDraw2DNear()
+{
+	gameoverSprite->Draw();
 }
