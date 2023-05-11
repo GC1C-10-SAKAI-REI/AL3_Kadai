@@ -53,6 +53,15 @@ private://メンバ変数
 	DebugText *debugText_ = nullptr;
 	int gamrScore_ = 0;
 
+	enum Scene
+	{
+		TITLE_,
+		GAMEPLAY_,
+		GAMEOVER_
+	};
+
+	Scene scene = GAMEPLAY_;
+
 public://メンバ関数
 	//コンストラクタ
 	GameScene();
