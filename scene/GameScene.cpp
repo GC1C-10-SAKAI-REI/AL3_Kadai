@@ -221,7 +221,7 @@ void GameScene::Draw()
 
 		// ここから
 
-		GamePlayDraw2DBack();
+		
 
 		// ここまで
 
@@ -237,7 +237,7 @@ void GameScene::Draw()
 
 		// ここから
 
-		GamePlayDraw3D();
+		
 
 		// ここまで
 
@@ -251,7 +251,6 @@ void GameScene::Draw()
 
 		// ここから
 
-		GamePlayDraw2DNear();
 		debugText_->DrawAll();
 
 		// ここまで
