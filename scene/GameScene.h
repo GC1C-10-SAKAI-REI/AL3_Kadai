@@ -59,7 +59,7 @@ private://メンバ変数
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
-	int gamrScore_ = 0;	
+	int gameScore_ = 0;	
 
 	//タイトル
 	uint32_t texHundleTitle_ = 0;
@@ -115,6 +115,8 @@ private:
 	void TitleUpdate();
 	// タイトル2D
 	void TitleDraw2DNear();
+	//ゲームプレイ初期化
+	void GamePlayStart();
 	//ゲームプレイ更新
 	void GamePlayUpdate();
 	// ゲームプレイ3D表示

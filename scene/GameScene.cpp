@@ -390,7 +390,7 @@ void GameScene::CollisionBtoE()
 		// 衝突したら
 		if (dx < 1 && dz < 1)
 		{
-			gamrScore_ += 10;
+			gameScore_ += 10;
 			enemyAlive_ = false;
 			beamFlag_ = false;
 		}
@@ -403,6 +403,7 @@ void GameScene::TitleUpdate()
 
 	if (input_->TriggerKey(DIK_RETURN))
 	{
+		GamePlayStart();
 		scene = GAMEPLAY_;
 	}
 }
@@ -416,6 +417,15 @@ void GameScene::TitleDraw2DNear()
 	{
 		enterSprite->Draw();
 	}
+}
+
+void GameScene::GamePlayStart()
+{
+	gameScore_ = 0;
+	playerLife_ = 3;
+	enemyAlive_ = false;
+	beamFlag_ = false;
+	playerWorldTransform_.translation_.x = 0;
 }
 
 void GameScene::GamePlayUpdate()
@@ -462,7 +472,7 @@ void GameScene::GamePlayDraw2DNear()
 {
 	//ゲームスコア
 	char score[100];
-	sprintf_s(score, "SCORE : %d", gamrScore_);
+	sprintf_s(score, "SCORE : %d", gameScore_);
 	debugText_->Print(score, 200, 10, 2);
 	//ライフ
 	char life[10];
