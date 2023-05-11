@@ -22,6 +22,8 @@ GameScene::~GameScene()
 	delete spriteBG_;
 	//床
 	delete stageModel_;
+	//タイトル
+	delete titleSprite;
 }
 
 //初期化
@@ -76,6 +78,10 @@ void GameScene::Initialize()
 	enemyWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
 	enemyWorldTransform_.Initialize();
 
+	//タイトル
+	texHundleTitle_ = TextureManager::Load("title.png");
+	titleSprite = Sprite::Create(texHundleTitle_, {0, 0});
+
 	//乱数
 	srand((unsigned int)time(NULL));
 
@@ -91,19 +97,18 @@ void GameScene::Update()
 {
 	switch (scene)
 	{
-	case GameScene::TITLE_:
-
+	case TITLE_:
+		TitleUpdate();
 		break;
 
-	case GameScene::GAMEPLAY_:
+	case GAMEPLAY_:
 		GamePlayUpdate();
 		break;
 
-	case GameScene::GAMEOVER_:
+	case GAMEOVER_:
 
 		break;
 	}
-	
 }
 
 //描画
@@ -120,19 +125,19 @@ void GameScene::Draw()
 
 	switch (scene)
 	{
-	case GameScene::TITLE_:
+	case TITLE_:
 
 
 
 		break;
 
-	case GameScene::GAMEPLAY_:
+	case GAMEPLAY_:
 
 		GamePlayDraw2DBack();
 
 		break;
 
-	case GameScene::GAMEOVER_:
+	case GAMEOVER_:
 
 
 
@@ -155,19 +160,19 @@ void GameScene::Draw()
 
 	switch (scene)
 	{
-	case GameScene::TITLE_:
+	case TITLE_:
 
 
 
 		break;
 
-	case GameScene::GAMEPLAY_:
+	case GAMEPLAY_:
 
 		GamePlayDraw3D();
 
 		break;
 
-	case GameScene::GAMEOVER_:
+	case GAMEOVER_:
 
 
 
@@ -188,19 +193,19 @@ void GameScene::Draw()
 
 	switch (scene)
 	{
-	case GameScene::TITLE_:
+	case TITLE_:
 
-
+		TitleDraw2DNear();
 
 		break;
 
-	case GameScene::GAMEPLAY_:
+	case GAMEPLAY_:
 
 		GamePlayDraw2DNear();
 
 		break;
 
-	case GameScene::GAMEOVER_:
+	case GAMEOVER_:
 
 
 
@@ -374,6 +379,16 @@ void GameScene::CollisionBtoE()
 	}
 }
 
+void GameScene::TitleUpdate()
+{
+
+}
+
+void GameScene::TitleDraw2DNear()
+{
+	titleSprite->Draw();
+}
+
 void GameScene::GamePlayUpdate()
 {
 	// プレイヤー
@@ -393,11 +408,13 @@ void GameScene::GamePlayDraw3D()
 	// プレイヤー
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
 	// ビーム
-	if (beamFlag_) {
+	if (beamFlag_)
+	{
 		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
 	}
 	//敵
-	if (enemyAlive_) {
+	if (enemyAlive_)
+	{
 		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
 	}
 }

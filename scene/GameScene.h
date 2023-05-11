@@ -11,6 +11,14 @@
 #include "DebugText.h"
 #include <time.h>
 
+//シーン列挙体
+enum Scene
+{ 
+	TITLE_,
+	GAMEPLAY_,
+	GAMEOVER_
+};
+
 //ゲームシーン
 class GameScene
 {
@@ -51,16 +59,14 @@ private://メンバ変数
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
-	int gamrScore_ = 0;
+	int gamrScore_ = 0;	
 
-	enum Scene
-	{
-		TITLE_,
-		GAMEPLAY_,
-		GAMEOVER_
-	};
+	//タイトル(スプライト)
+	uint32_t texHundleTitle_ = 0;
+	Sprite *titleSprite = nullptr;
 
-	Scene scene = GAMEPLAY_;
+	//シーン管理用変数
+	Scene scene = TITLE_;
 
 public://メンバ関数
 	//コンストラクタ
@@ -95,6 +101,10 @@ private:
 	void CollisionPtoE();
 	//衝突判定(ビームと敵)
 	void CollisionBtoE();
+	//タイトル更新
+	void TitleUpdate();
+	// タイトル2D
+	void TitleDraw2DNear();
 	//ゲームプレイ更新
 	void GamePlayUpdate();
 	// ゲームプレイ3D表示
