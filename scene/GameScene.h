@@ -52,6 +52,8 @@ private://メンバ変数
 	WorldTransform beamWorldTransform_[remainBeam];
 	//ビーム管理フラグ
 	bool beamFlag_[remainBeam] = {false};
+	//
+	int beamCoolTime_ = 0;
 
 	//敵
 	uint32_t texHundleEnemy_ = 0;

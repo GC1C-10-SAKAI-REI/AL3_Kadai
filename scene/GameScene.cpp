@@ -299,13 +299,27 @@ void GameScene::BeamBorn()
 {
 	for (int i = 0; i < remainBeam; i++)
 	{
-		if (input_->TriggerKey(DIK_SPACE) && !beamFlag_[i])
+		if (beamCoolTime_ == 0)
 		{
-			beamFlag_[i] = true;
-			beamWorldTransform_[i].translation_.x = playerWorldTransform_.translation_.x;
-			beamWorldTransform_[i].translation_.z = playerWorldTransform_.translation_.z;
-			break;
+			if (input_->TriggerKey(DIK_SPACE) && !beamFlag_[i])
+			{
+				beamFlag_[i] = true;
+				beamWorldTransform_[i].translation_.x = playerWorldTransform_.translation_.x;
+				beamWorldTransform_[i].translation_.z = playerWorldTransform_.translation_.z;
+				beamCoolTime_ = 1;
+				break;
+			}
 		}
+		else
+		{
+			//クールタイムが1以上
+			//10を超えると再び発射が可能
+			beamCoolTime_++;
+			if (beamCoolTime_ > 90)
+			{
+				beamCoolTime_ = 0;
+			}
+		}		
 	}
 }
 
