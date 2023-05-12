@@ -73,13 +73,16 @@ void GameScene::Initialize()
 	//ビーム
 	texHundleBeam_ = TextureManager::Load("beam.png");
 	beamModel_ = Model::Create();
-	beamWorldTransform_.scale_ = {0.3f, 0.3f, 0.3f};
-	beamWorldTransform_.Initialize();
+	for (int i = 0; i < remainBeam; i++)
+	{
+		beamWorldTransform_[i].scale_ = {0.3f, 0.3f, 0.3f};
+		beamWorldTransform_[i].Initialize();
+	}
 
 	//敵
 	texHundleEnemy_ = TextureManager::Load("enemy.png");
 	enemyModel_ = Model::Create();
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		enemyWorldTransform_[i].scale_ = {0.5f, 0.5f, 0.5f};
 		enemyWorldTransform_[i].Initialize();
@@ -281,35 +284,45 @@ void GameScene::BeamUpdate()
 	BeamMove();
 
 	//変換行列を更新
-	beamWorldTransform_.matWorld_ = MakeAffineMatrix(
-	    beamWorldTransform_.scale_, 
-		beamWorldTransform_.rotation_,
-	    beamWorldTransform_.translation_);
-	// 変換行列をバッファに転送
-	beamWorldTransform_.TransferMatrix();
+	for (int i = 0; i < remainBeam; i++)
+	{
+		beamWorldTransform_[i].matWorld_ = MakeAffineMatrix(
+		    beamWorldTransform_[i].scale_,
+			beamWorldTransform_[i].rotation_,
+		    beamWorldTransform_[i].translation_);
+		// 変換行列をバッファに転送
+		beamWorldTransform_[i].TransferMatrix();
+	}
 }
 
 void GameScene::BeamBorn()
 {
-	if (input_->TriggerKey(DIK_SPACE) && !beamFlag_)
-	{		
-		beamFlag_ = true;
-		beamWorldTransform_.translation_.x = playerWorldTransform_.translation_.x;
-		beamWorldTransform_.translation_.z = playerWorldTransform_.translation_.z;
+	for (int i = 0; i < remainBeam; i++)
+	{
+		if (input_->TriggerKey(DIK_SPACE) && !beamFlag_[i])
+		{
+			beamFlag_[i] = true;
+			beamWorldTransform_[i].translation_.x = playerWorldTransform_.translation_.x;
+			beamWorldTransform_[i].translation_.z = playerWorldTransform_.translation_.z;
+			break;
+		}
 	}
 }
 
 void GameScene::BeamMove()
 {
-	if (beamFlag_)
+	for (int i = 0; i < remainBeam; i++)
 	{
-		beamWorldTransform_.translation_.z += 0.5f;
-		beamWorldTransform_.rotation_.x += 0.1f;
-	}
+		if (beamFlag_[i])
+		{
+			beamWorldTransform_[i].translation_.z += 0.5f;
+			beamWorldTransform_[i].rotation_.x += 0.1f;
+		}
 
-	if (beamWorldTransform_.translation_.z >= 40.0f)
-	{
-		beamFlag_ = false;
+		if (beamWorldTransform_[i].translation_.z >= 40.0f)
+		{
+			beamFlag_[i] = false;
+		}
 	}
 }
 
@@ -318,7 +331,7 @@ void GameScene::EnemyUpdate()
 	EnemyBorn();
 	EnemyMove();
 
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		// 変換行列を更新
 			enemyWorldTransform_[i].matWorld_ = MakeAffineMatrix(
@@ -333,7 +346,7 @@ void GameScene::EnemyBorn()
 {
 	if (rand() % 10 == 0)
 	{
-		for (int i = 0; i < enemyNum; i++) 
+		for (int i = 0; i < remainEnemy; i++) 
 		{
 			if (!enemyAlive_[i])
 			{
@@ -351,7 +364,7 @@ void GameScene::EnemyBorn()
 
 void GameScene::EnemyMove()
 {
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		if (enemyAlive_[i])
 		{
@@ -374,7 +387,7 @@ void GameScene::Collision()
 
 void GameScene::CollisionPtoE()
 {
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		// 敵が生きていれば
 		if (enemyAlive_[i])
@@ -400,26 +413,29 @@ void GameScene::CollisionPtoE()
 
 void GameScene::CollisionBtoE()
 {
-	//for (int i = 0; i < enemyNum; i++)
-	//{
-	//	// 敵が生きていれば
-	//	if (enemyAlive_[i] && beamFlag_)
-	//	{
-	//		// 差を求める
-	//		float dx =
-	//		    abs(beamWorldTransform_.translation_.x - enemyWorldTransform_[i].translation_.x);
-	//		float dz =
-	//		    abs(beamWorldTransform_.translation_.z - enemyWorldTransform_[i].translation_.z);
+	for (int i = 0; i < remainEnemy; i++)
+	{
+		for (int j = 0; j < remainBeam; j++)
+		{
+			//弾が存在かつ敵が生きていれば
+			if (enemyAlive_[i] && beamFlag_[j])
+			{
+				// 差を求める
+				float dx = abs(
+				    beamWorldTransform_[j].translation_.x - enemyWorldTransform_[i].translation_.x);
+				float dz = abs(
+				    beamWorldTransform_[j].translation_.z - enemyWorldTransform_[i].translation_.z);
 
-	//		// 衝突したら
-	//		if (dx < 1 && dz < 1)
-	//		{
-	//			gameScore_ += 10;
-	//			enemyAlive_[i] = false;
-	//			beamFlag_ = false;
-	//		}
-	//	}
-	//}
+				// 衝突したら
+				if (dx < 1 && dz < 1)
+				{
+					gameScore_ += 10;
+					enemyAlive_[i] = false;
+					beamFlag_[j] = false;
+				}
+			}
+		}
+	}
 }
 
 void GameScene::TitleUpdate()
@@ -448,9 +464,12 @@ void GameScene::GamePlayStart()
 {
 	gameScore_ = 0;
 	playerLife_ = 3;	
-	beamFlag_ = false;
 	playerWorldTransform_.translation_.x = 0;
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainBeam; i++)
+	{
+		beamFlag_[i] = false;
+	}	
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		enemyAlive_[i] = false;
 	}
@@ -480,12 +499,16 @@ void GameScene::GamePlayDraw3D()
 	// プレイヤー
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
 	// ビーム
-	if (beamFlag_)
+	for (int i = 0; i < remainBeam; i++)
 	{
-		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
+		if (beamFlag_[i])
+		{
+			beamModel_->Draw(beamWorldTransform_[i], viewProjection_, texHundleBeam_);
+		}
 	}
+	
 	//敵
-	for (int i = 0; i < enemyNum; i++)
+	for (int i = 0; i < remainEnemy; i++)
 	{
 		if (enemyAlive_[i])
 		{

@@ -47,16 +47,20 @@ private://メンバ変数
 	// ビーム
 	uint32_t texHundleBeam_ = 0;
 	Model *beamModel_ = nullptr;
-	WorldTransform beamWorldTransform_;
+	//残弾数
+	static const int remainBeam = 10;
+	WorldTransform beamWorldTransform_[remainBeam];
 	//ビーム管理フラグ
-	bool beamFlag_ = false;
+	bool beamFlag_[remainBeam] = {false};
 
 	//敵
 	uint32_t texHundleEnemy_ = 0;
 	Model *enemyModel_ = nullptr;
-	static const int enemyNum = 10;
-	WorldTransform enemyWorldTransform_[enemyNum];
-	bool enemyAlive_[enemyNum] = {false};
+	//敵の数
+	static const int remainEnemy = 10;
+	WorldTransform enemyWorldTransform_[remainEnemy];
+	//死亡フラグ
+	bool enemyAlive_[remainEnemy] = {false};
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
