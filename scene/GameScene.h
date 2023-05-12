@@ -92,30 +92,40 @@ public://メンバ関数
 	void Draw();
 
 private:
+	/*プレイヤー*/
 	//自機更新
 	void PlayerUpdate();
+
+	/*弾*/
 	//ビーム更新
 	void BeamUpdate();
 	//ビーム発生
 	void BeamBorn();
 	//ビーム移動
 	void BeamMove();
+
+	/*敵*/
 	//敵の更新
 	void EnemyUpdate();
 	//敵の発生
 	void EnemyBorn();
 	//敵の移動
 	void EnemyMove();
+
+	/*当たり判定*/
 	//衝突判定
 	void Collision();
 	//衝突判定(自機と敵)
 	void CollisionPtoE();
 	//衝突判定(ビームと敵)
 	void CollisionBtoE();
+
+	/*シーン関係*/
 	//タイトル更新
 	void TitleUpdate();
 	// タイトル2D
 	void TitleDraw2DNear();
+
 	//ゲームプレイ初期化
 	void GamePlayStart();
 	//ゲームプレイ更新
@@ -126,6 +136,7 @@ private:
 	void GamePlayDraw2DBack();
 	// ゲームプレイ近景2D表示
 	void GamePlayDraw2DNear();
+
 	// ゲームオーバー更新
 	void GameoverUpdate();
 	// ゲームオーバー2D

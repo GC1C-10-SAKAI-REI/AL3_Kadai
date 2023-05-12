@@ -374,34 +374,36 @@ void GameScene::Collision()
 
 void GameScene::CollisionPtoE()
 {
-	////敵が生きていれば
-	//if (enemyAlive_)
-	//{
-	//	for (int i = 0; i < enemyNum; i++)
-	//	{
-	//		// 差を求める
-	//		float dx = abs(playerWorldTransform_.translation_.x - enemyWorldTransform_[i].translation_.x);
-	//		float dz = abs(playerWorldTransform_.translation_.z - enemyWorldTransform_[i].translation_.z);
+	for (int i = 0; i < enemyNum; i++)
+	{
+		// 敵が生きていれば
+		if (enemyAlive_[i])
+		{
+			// 差を求める
+			float dx =
+			    abs(playerWorldTransform_.translation_.x - enemyWorldTransform_[i].translation_.x);
+			float dz =
+			    abs(playerWorldTransform_.translation_.z - enemyWorldTransform_[i].translation_.z);
 
-	//		// 衝突したら
-	//		if (dx < 1 && dz < 1)
-	//		{
-	//			if (playerLife_ > 0)
-	//			{
-	//				playerLife_ -= 1;
-	//			}
-	//			enemyAlive_[i] = false;
-	//		}
-	//	}		
-	//}
+			// 衝突したら
+			if (dx < 1 && dz < 1)
+			{
+				if (playerLife_ > 0)
+				{
+					playerLife_ -= 1;
+				}
+				enemyAlive_[i] = false;
+			}
+		}
+	}
 }
 
 void GameScene::CollisionBtoE()
 {
-	//// 敵が生きていれば
-	//if (enemyAlive_ && beamFlag_)
+	//for (int i = 0; i < enemyNum; i++)
 	//{
-	//	for (int i = 0; i < enemyNum; i++)
+	//	// 敵が生きていれば
+	//	if (enemyAlive_[i] && beamFlag_)
 	//	{
 	//		// 差を求める
 	//		float dx =
@@ -410,7 +412,8 @@ void GameScene::CollisionBtoE()
 	//		    abs(beamWorldTransform_.translation_.z - enemyWorldTransform_[i].translation_.z);
 
 	//		// 衝突したら
-	//		if (dx < 1 && dz < 1) {
+	//		if (dx < 1 && dz < 1)
+	//		{
 	//			gameScore_ += 10;
 	//			enemyAlive_[i] = false;
 	//			beamFlag_ = false;
