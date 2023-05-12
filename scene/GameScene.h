@@ -54,8 +54,9 @@ private://メンバ変数
 	//敵
 	uint32_t texHundleEnemy_ = 0;
 	Model *enemyModel_ = nullptr;
-	WorldTransform enemyWorldTransform_;
-	bool enemyAlive_ = false;
+	static const int enemyNum = 10;
+	WorldTransform enemyWorldTransform_[enemyNum];
+	bool enemyAlive_[enemyNum] = {false};
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
