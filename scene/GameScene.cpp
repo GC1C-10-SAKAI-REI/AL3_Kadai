@@ -92,7 +92,7 @@ void GameScene::Initialize()
 
 	//ゲームオーバー
 	texHundleGameover_ = TextureManager::Load("gameover.png");
-	gameoverSprite = Sprite::Create(texHundleGameover_, {0, 360});
+	gameoverSprite = Sprite::Create(texHundleGameover_, {0, 100});
 
 	//乱数
 	srand((unsigned int)time(NULL));
@@ -451,15 +451,19 @@ void GameScene::GamePlayDraw3D()
 	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
 	// プレイヤー
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
-	// ビーム
-	if (beamFlag_)
+
+	if (scene == GAMEPLAY_)
 	{
-		beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
-	}
-	//敵
-	if (enemyAlive_)
-	{
-		enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
+		// ビーム
+		if (beamFlag_)
+		{
+			beamModel_->Draw(beamWorldTransform_, viewProjection_, texHundleBeam_);
+		}
+		// 敵
+		if (enemyAlive_)
+		{
+			enemyModel_->Draw(enemyWorldTransform_, viewProjection_, texHundleEnemy_);
+		}
 	}
 }
 
@@ -482,6 +486,8 @@ void GameScene::GamePlayDraw2DNear()
 
 void GameScene::GameoverUpdate()
 {
+	gameTimer_++;
+
 	if (input_->TriggerKey(DIK_RETURN))
 	{
 		scene = TITLE_;
@@ -491,4 +497,10 @@ void GameScene::GameoverUpdate()
 void GameScene::GameoverDraw2DNear()
 {
 	gameoverSprite->Draw();
+
+	// エンター表示
+	if (gameTimer_ % 40 >= 20)
+	{
+		enterSprite->Draw();
+	}
 }
