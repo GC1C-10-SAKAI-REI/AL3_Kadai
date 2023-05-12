@@ -313,7 +313,7 @@ void GameScene::BeamBorn()
 		else
 		{
 			//クールタイムが1以上
-			//10を超えると再び発射が可能
+			//90を超えると再び発射が可能
 			beamCoolTime_++;
 			if (beamCoolTime_ > 90)
 			{
@@ -370,6 +370,16 @@ void GameScene::EnemyBorn()
 				enemyWorldTransform_[i].translation_.x = x2;
 				enemyAlive_[i] = true;
 				enemyWorldTransform_[i].translation_.z = 40;
+				//X移動成分初期値の設定
+				if (rand() % 2 == 0)
+				{
+					enemyAmplitude[i] = 0.1f;
+				}
+				else
+				{
+					enemyAmplitude[i] = -0.1f;
+				}
+
 				break;
 			}
 		}
@@ -382,8 +392,17 @@ void GameScene::EnemyMove()
 	{
 		if (enemyAlive_[i])
 		{
-			enemyWorldTransform_[i].translation_.z -= 0.3f;
+			enemyWorldTransform_[i].translation_.z -= 0.2f;
 			enemyWorldTransform_[i].rotation_.z += 0.2f;
+			enemyWorldTransform_[i].translation_.x += enemyAmplitude[i];
+			if (enemyWorldTransform_[i].translation_.x > 4)
+			{
+				enemyAmplitude[i] *= -1;
+			}
+			else if (enemyWorldTransform_[i].translation_.x < -4)
+			{
+				enemyAmplitude[i] *= -1;
+			}
 
 			if (enemyWorldTransform_[i].translation_.z < -5)
 			{

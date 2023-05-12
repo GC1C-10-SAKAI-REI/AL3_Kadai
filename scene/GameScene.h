@@ -52,7 +52,7 @@ private://メンバ変数
 	WorldTransform beamWorldTransform_[remainBeam];
 	//ビーム管理フラグ
 	bool beamFlag_[remainBeam] = {false};
-	//
+	//弾のクールタイム
 	int beamCoolTime_ = 0;
 
 	//敵
@@ -63,6 +63,8 @@ private://メンバ変数
 	WorldTransform enemyWorldTransform_[remainEnemy];
 	//死亡フラグ
 	bool enemyAlive_[remainEnemy] = {false};
+	//敵の左右移動幅
+	float enemyAmplitude[remainEnemy] = {0.0f};
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
