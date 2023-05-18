@@ -36,7 +36,8 @@ private://メンバ変数
 	// ステージ
 	uint32_t texHundleStage_ = 0;
 	Model *stageModel_ = nullptr;
-	WorldTransform stageWorldTransform_;
+	static const int stageVal = 20;
+	WorldTransform stageWorldTransform_[stageVal];
 
 	//プレイヤー
 	uint32_t texHundlePlayer_ = 0;

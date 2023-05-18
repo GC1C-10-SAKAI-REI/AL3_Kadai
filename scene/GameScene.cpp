@@ -48,21 +48,25 @@ void GameScene::Initialize()
 	spriteBG_ = Sprite::Create(bgTexHundle_, {0, 0});
 
 	//ステージ
-	texHundleStage_ = TextureManager::Load("stage.jpg");
+	texHundleStage_ = TextureManager::Load("stage2.jpg");
 	stageModel_ = Model::Create();
-	stageWorldTransform_.Initialize();
+	for (int i = 0; i < stageVal; i++)
+	{
+		stageWorldTransform_[i].Initialize();
+	}
 
-	//ステージの位置を変更
-	stageWorldTransform_.translation_ = {0, -1.5f, 0};
-	stageWorldTransform_.scale_ = {4.5f, 1, 40};
-	//変換行列を更新
-	stageWorldTransform_.matWorld_ = 
-		MakeAffineMatrix
-		(stageWorldTransform_.scale_,
-		stageWorldTransform_.rotation_,
-	    stageWorldTransform_.translation_);
-	//変換行列を定数バッファに転送
-	stageWorldTransform_.TransferMatrix();
+	for (int i = 0; i < stageVal; i++)
+	{
+		// ステージの位置を変更
+		stageWorldTransform_[i].translation_ = {0, -1.5f, 2.0f * i - 5};
+		stageWorldTransform_[i].scale_ = {4.5f, 1, 1};
+		// 変換行列を更新
+		stageWorldTransform_[i].matWorld_ = MakeAffineMatrix(
+		    stageWorldTransform_[i].scale_, stageWorldTransform_[i].rotation_,
+		    stageWorldTransform_[i].translation_);
+		// 変換行列を定数バッファに転送
+		stageWorldTransform_[i].TransferMatrix();
+	}
 
 	//プレイヤー
 	texHundlePlayer_ = TextureManager::Load("player.png");
@@ -545,7 +549,10 @@ void GameScene::GamePlayUpdate()
 void GameScene::GamePlayDraw3D()
 {
 	// 床
-	stageModel_->Draw(stageWorldTransform_, viewProjection_, texHundleStage_);
+	for (int i = 0; i < stageVal; i++)
+	{
+		stageModel_->Draw(stageWorldTransform_[i], viewProjection_, texHundleStage_);
+	}
 	// プレイヤー
 	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
 	
