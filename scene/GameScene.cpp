@@ -448,6 +448,7 @@ void GameScene::CollisionPtoE()
 				{
 					playerLife_ -= 1;
 				}
+				audio_->PlayWave(soundDataHandlePlayerHitSE_);
 				enemyAlive_[i] = false;
 			}
 		}
@@ -473,6 +474,7 @@ void GameScene::CollisionBtoE()
 				if (dx < 1 && dz < 1)
 				{
 					gameScore_ += 10;
+					audio_->PlayWave(soundDataHandleEnemyHitSE_);
 					enemyAlive_[i] = false;
 					beamFlag_[j] = false;
 				}
