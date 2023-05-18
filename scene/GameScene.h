@@ -158,4 +158,6 @@ private:
 	void GameoverUpdate();
 	// ゲームオーバー2D
 	void GameoverDraw2DNear();
+
+	void StageUpdate();
 };
