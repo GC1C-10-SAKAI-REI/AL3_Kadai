@@ -536,7 +536,7 @@ void GameScene::GamePlayUpdate()
 
 	if (playerLife_ < 1)
 	{
-		audio_->StopWave(soundDataHandleGamePlayBGM_);
+		audio_->StopWave(voiceHandleBGM_);
 		voiceHandleBGM_ = audio_->PlayWave(soundDataHandleGameOverBGM_, true);
 		scene = GAMEOVER_;
 	}
@@ -593,7 +593,7 @@ void GameScene::GameoverUpdate()
 
 	if (input_->TriggerKey(DIK_RETURN))
 	{
-		audio_->StopWave(soundDataHandleGameOverBGM_);
+		audio_->StopWave(voiceHandleBGM_);
 		voiceHandleBGM_ = audio_->PlayWave(soundDataHandleTitleBGM_, true);
 		scene = TITLE_;
 	}
