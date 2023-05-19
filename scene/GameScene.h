@@ -63,9 +63,11 @@ private://メンバ変数
 	static const int remainEnemy = 10;
 	WorldTransform enemyWorldTransform_[remainEnemy];
 	//死亡フラグ
-	bool enemyAlive_[remainEnemy] = {false};
+	int enemyAlive_[remainEnemy] = {false};
 	//敵の左右移動幅
 	float enemyAmplitude[remainEnemy] = {0.0f};
+	//敵ジャンプの移動速度
+	float enemyJampSpd_[remainEnemy] = {};
 
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
@@ -128,6 +130,8 @@ private:
 	void EnemyBorn();
 	//敵の移動
 	void EnemyMove();
+	//敵の消滅
+	void EnemyDelete();
 
 	/*当たり判定*/
 	//衝突判定

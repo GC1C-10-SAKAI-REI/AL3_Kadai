@@ -358,6 +358,7 @@ void GameScene::EnemyUpdate()
 {
 	EnemyBorn();
 	EnemyMove();
+	EnemyDelete();
 
 	for (int i = 0; i < remainEnemy; i++)
 	{
@@ -381,8 +382,9 @@ void GameScene::EnemyBorn()
 				// 乱数でX座標の指定
 				int x = rand() % 80;
 				float x2 = (float)x / 10 - 4;
-				enemyWorldTransform_[i].translation_.x = x2;
 				enemyAlive_[i] = true;
+				enemyWorldTransform_[i].translation_.x = x2;
+				enemyWorldTransform_[i].translation_.y = 0;
 				enemyWorldTransform_[i].translation_.z = 40;
 				//X移動成分初期値の設定
 				if (rand() % 2 == 0)
@@ -404,7 +406,7 @@ void GameScene::EnemyMove()
 {
 	for (int i = 0; i < remainEnemy; i++)
 	{
-		if (enemyAlive_[i])
+		if (enemyAlive_[i] == 1)
 		{
 			enemyWorldTransform_[i].translation_.z -= 0.2f;
 			enemyWorldTransform_[i].rotation_.z += 0.2f;
@@ -419,6 +421,27 @@ void GameScene::EnemyMove()
 			}
 
 			if (enemyWorldTransform_[i].translation_.z < -5)
+			{
+				enemyAlive_[i] = false;
+			}
+		}
+	}
+}
+
+void GameScene::EnemyDelete()
+{
+	for (int i = 0; i < remainEnemy; i++)
+	{
+		if (enemyAlive_[i] == 2)
+		{
+			//移動
+			enemyWorldTransform_[i].translation_.y += enemyJampSpd_[i];
+			//速度を減らす
+			enemyJampSpd_[i] -= 0.1f;
+			//斜め移動
+			enemyWorldTransform_[i].translation_.x += enemyAmplitude[i] * 3;
+			//下に落ちると消滅
+			if (enemyWorldTransform_[i].translation_.y < -3)
 			{
 				enemyAlive_[i] = false;
 			}
@@ -466,7 +489,7 @@ void GameScene::CollisionBtoE()
 		for (int j = 0; j < remainBeam; j++)
 		{
 			//弾が存在かつ敵が生きていれば
-			if (enemyAlive_[i] && beamFlag_[j])
+			if (enemyAlive_[i] == 1 && beamFlag_[j])
 			{
 				// 差を求める
 				float dx = abs(
@@ -479,7 +502,8 @@ void GameScene::CollisionBtoE()
 				{
 					gameScore_ += 10;
 					audio_->PlayWave(soundDataHandleEnemyHitSE_);
-					enemyAlive_[i] = false;
+					enemyJampSpd_[i] = 1;
+					enemyAlive_[i] = 2;
 					beamFlag_[j] = false;
 				}
 			}
@@ -571,7 +595,7 @@ void GameScene::GamePlayDraw3D()
 		// 敵
 		for (int i = 0; i < remainEnemy; i++)
 		{
-			if (enemyAlive_[i])
+			if (!(!enemyAlive_[i]))
 			{
 				enemyModel_->Draw(enemyWorldTransform_[i], viewProjection_, texHundleEnemy_);
 			}
