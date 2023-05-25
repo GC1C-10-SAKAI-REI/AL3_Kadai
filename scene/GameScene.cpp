@@ -408,9 +408,10 @@ void GameScene::EnemyMove()
 	{
 		if (enemyAlive_[i] == 1)
 		{
-			enemyWorldTransform_[i].translation_.z -= 0.2f;
-			enemyWorldTransform_[i].rotation_.z += 0.2f;
 			enemyWorldTransform_[i].translation_.x += enemyAmplitude[i];
+			enemyWorldTransform_[i].translation_.z -= 0.2f;
+			enemyWorldTransform_[i].translation_.z -= gameTimer_ / 2.0f;
+			enemyWorldTransform_[i].rotation_.z += 0.2f;
 			if (enemyWorldTransform_[i].translation_.x > 4)
 			{
 				enemyAmplitude[i] *= -1;
@@ -539,6 +540,7 @@ void GameScene::TitleDraw2DNear()
 void GameScene::GamePlayStart()
 {
 	gameScore_ = 0;
+	gameTimer_ = 0;
 	playerLife_ = 3;	
 	playerWorldTransform_.translation_.x = 0;
 	for (int i = 0; i < remainBeam; i++)
