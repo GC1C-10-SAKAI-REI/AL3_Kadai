@@ -26,13 +26,14 @@ GameScene::~GameScene()
 	delete titleSprite;
 	//エンターキーの案内
 	delete enterSprite;
-	//
+	//ゲームオーバー
 	delete gameoverSprite;
-	//
+	//スコア数値
 	for (int i = 0; i < 5; i++)
 	{
 		delete numberSprite_[i];
 	}
+	//SCOREの文字
 	delete scoreSprite_;
 	//ライフ
 	for (int i = 0; i < 3; i++)

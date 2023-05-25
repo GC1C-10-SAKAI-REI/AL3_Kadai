@@ -43,7 +43,9 @@ private://メンバ変数
 	uint32_t texHundlePlayer_ = 0;
 	Model *playerModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
+	//残機
 	int playerLife_ = 3;
+	//被弾時の点滅用
 	int playerTimer_ = 0;
 
 	// ビーム
@@ -89,6 +91,7 @@ private://メンバ変数
 	//シーン管理用変数
 	Scene scene = TITLE_;
 
+	//エンターキー案内のためのタイマー
 	int gameTimer_ = 0;
 
 	//サウンド
@@ -103,8 +106,8 @@ private://メンバ変数
 	uint32_t texHundleNumber_ = 0;
 	Sprite *numberSprite_[5] = {};
 	//スコア
-	uint32_t texHundleScore_ = 0;
-	Sprite *scoreSprite_ = nullptr;
+	uint32_t texHundleScore_ = 0;	//数値
+	Sprite *scoreSprite_ = nullptr;	//SCOREの文字
 	//ライフ
 	Sprite* lifeSprite_[3] = {};
 
@@ -172,11 +175,11 @@ private:
 	void GameoverUpdate();
 	// ゲームオーバー2D
 	void GameoverDraw2DNear();
-
+	//スクロール処理
 	void StageUpdate();
 
 	//スコア数値の表示
 	void DrawScore();
-	//
+	//ライフの表示
 	void DrawLife();
 };
