@@ -314,6 +314,11 @@ void GameScene::PlayerUpdate()
 	    playerWorldTransform_.translation_);
 	//変換行列をバッファに転送
 	playerWorldTransform_.TransferMatrix();
+
+	if (playerTimer_ > 0)
+	{
+		playerTimer_--;
+	}
 }
 
 void GameScene::BeamUpdate()
@@ -502,6 +507,7 @@ void GameScene::CollisionPtoE()
 				{
 					playerLife_ -= 1;
 				}
+				playerTimer_ = 60;
 				audio_->PlayWave(soundDataHandlePlayerHitSE_);
 				enemyAlive_[i] = false;
 			}
@@ -567,7 +573,8 @@ void GameScene::GamePlayStart()
 {
 	gameScore_ = 0;
 	gameTimer_ = 0;
-	playerLife_ = 3;	
+	playerTimer_ = 0;
+	playerLife_ = 3;
 	playerWorldTransform_.translation_.x = 0;
 	for (int i = 0; i < remainBeam; i++)
 	{
@@ -608,7 +615,10 @@ void GameScene::GamePlayDraw3D()
 		stageModel_->Draw(stageWorldTransform_[i], viewProjection_, texHundleStage_);
 	}
 	// プレイヤー
-	playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
+	if (playerTimer_ % 4 < 2)
+	{
+		playerModel_->Draw(playerWorldTransform_, viewProjection_, texHundlePlayer_);
+	}
 	
 	if (scene == GAMEPLAY_)
 	{

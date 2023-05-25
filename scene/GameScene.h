@@ -44,6 +44,7 @@ private://メンバ変数
 	Model *playerModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
 	int playerLife_ = 3;
+	int playerTimer_ = 0;
 
 	// ビーム
 	uint32_t texHundleBeam_ = 0;
