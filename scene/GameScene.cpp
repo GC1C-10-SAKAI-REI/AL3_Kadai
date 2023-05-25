@@ -33,6 +33,12 @@ GameScene::~GameScene()
 	{
 		delete numberSprite_[i];
 	}
+	delete scoreSprite_;
+	//ライフ
+	for (int i = 0; i < 3; i++)
+	{
+		delete lifeSprite_[i];
+	}
 }
 
 //初期化
@@ -128,9 +134,17 @@ void GameScene::Initialize()
 
 	//スコア数値(2Dスプライト)
 	texHundleNumber_ = TextureManager::Load("number.png");
+	texHundleScore_ = TextureManager::Load("score.png");
+	scoreSprite_ = Sprite::Create(texHundleScore_, {170, 0});
 	for (int i = 0; i < 5; i++)
 	{
 		numberSprite_[i] = Sprite::Create(texHundleNumber_, {300.0f + i * 26, 0});
+	}
+	//ライフ
+	for (int i = 0; i < playerLife_; i++)
+	{
+		lifeSprite_[i] = Sprite::Create(texHundlePlayer_, {800.0f + i * 60, 20});
+		lifeSprite_[i]->SetSize({40, 40});
 	}
 
 	//ここまで
@@ -624,15 +638,10 @@ void GameScene::GamePlayDraw2DBack()
 
 void GameScene::GamePlayDraw2DNear()
 {
-	//ゲームスコア
-	/*char score[100];
-	sprintf_s(score, "SCORE : %d", gameScore_);
-	debugText_->Print(score, 200, 10, 2);*/
+	//ゲームスコア(値)
 	DrawScore();
 	//ライフ
-	char life[10];
-	sprintf_s(life, "LIFE : %d", playerLife_);
-	debugText_->Print(life, 840, 10, 2);
+	DrawLife();
 
 }
 
@@ -651,7 +660,6 @@ void GameScene::GameoverUpdate()
 void GameScene::GameoverDraw2DNear()
 {
 	gameoverSprite->Draw();
-
 	// エンター表示
 	if (gameTimer_ % 40 >= 20)
 	{
@@ -682,11 +690,33 @@ void GameScene::StageUpdate()
 
 void GameScene::DrawScore()
 {
+	//各行の値を取り出す
+	int eachNumber[5] = {};//各行の値
+	int number = gameScore_;//表示する数字
+
+	int keta = 10000;//最初の桁
+	for (int i = 0; i < 5; i++)
+	{
+		eachNumber[i] = number / keta;//今の桁の値を求める
+		number = number % keta;//次の桁以下の値を取り出す
+		keta = keta / 10;//桁を進める
+	}
+
 	//各行の数値を描画
 	for (int i = 0; i < 5; i++)
 	{
 		numberSprite_[i]->SetSize({32, 64});
-		numberSprite_[i]->SetTextureRect({0, 0}, {32, 64});
+		numberSprite_[i]->SetTextureRect({32.0f * eachNumber[i], 0}, {32, 64});
 		numberSprite_[i]->Draw();
+	}
+	//SCORE表示
+	scoreSprite_->Draw();
+}
+
+void GameScene::DrawLife()
+{
+	for (int i = 0; i < playerLife_; i++)
+	{
+		lifeSprite_[i]->Draw();
 	}
 }

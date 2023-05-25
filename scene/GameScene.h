@@ -100,7 +100,12 @@ private://メンバ変数
 
 	//スコア数値(スプライト)
 	uint32_t texHundleNumber_ = 0;
-	Sprite* numberSprite_[5] = {};
+	Sprite *numberSprite_[5] = {};
+	//スコア
+	uint32_t texHundleScore_ = 0;
+	Sprite *scoreSprite_ = nullptr;
+	//ライフ
+	Sprite* lifeSprite_[3] = {};
 
 public://メンバ関数
 	//コンストラクタ
@@ -171,4 +176,6 @@ private:
 
 	//スコア数値の表示
 	void DrawScore();
+	//
+	void DrawLife();
 };
