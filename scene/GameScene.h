@@ -98,6 +98,10 @@ private://メンバ変数
 	uint32_t soundDataHandlePlayerHitSE_ = 0;	//プレイヤーヒットSE
 	uint32_t voiceHandleBGM_ = 0;				//音声再生ハンドル
 
+	//スコア数値(スプライト)
+	uint32_t texHundleNumber_ = 0;
+	Sprite* numberSprite_[5] = {};
+
 public://メンバ関数
 	//コンストラクタ
 	GameScene();
@@ -164,4 +168,7 @@ private:
 	void GameoverDraw2DNear();
 
 	void StageUpdate();
+
+	//スコア数値の表示
+	void DrawScore();
 };

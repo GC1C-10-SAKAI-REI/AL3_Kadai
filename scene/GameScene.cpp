@@ -24,10 +24,15 @@ GameScene::~GameScene()
 	delete stageModel_;
 	//タイトル
 	delete titleSprite;
-	//
+	//エンターキーの案内
 	delete enterSprite;
 	//
 	delete gameoverSprite;
+	//
+	for (int i = 0; i < 5; i++)
+	{
+		delete numberSprite_[i];
+	}
 }
 
 //初期化
@@ -120,6 +125,13 @@ void GameScene::Initialize()
 
 	//タイトルBGM再生
 	voiceHandleBGM_ = audio_->PlayWave(soundDataHandleTitleBGM_, true);
+
+	//スコア数値(2Dスプライト)
+	texHundleNumber_ = TextureManager::Load("number.png");
+	for (int i = 0; i < 5; i++)
+	{
+		numberSprite_[i] = Sprite::Create(texHundleNumber_, {300.0f + i * 26, 0});
+	}
 
 	//ここまで
 }
@@ -613,13 +625,15 @@ void GameScene::GamePlayDraw2DBack()
 void GameScene::GamePlayDraw2DNear()
 {
 	//ゲームスコア
-	char score[100];
+	/*char score[100];
 	sprintf_s(score, "SCORE : %d", gameScore_);
-	debugText_->Print(score, 200, 10, 2);
+	debugText_->Print(score, 200, 10, 2);*/
+	DrawScore();
 	//ライフ
 	char life[10];
 	sprintf_s(life, "LIFE : %d", playerLife_);
 	debugText_->Print(life, 840, 10, 2);
+
 }
 
 void GameScene::GameoverUpdate()
@@ -663,5 +677,16 @@ void GameScene::StageUpdate()
 		    stageWorldTransform_[i].translation_);
 		// 変換行列を定数バッファに転送
 		stageWorldTransform_[i].TransferMatrix();
+	}
+}
+
+void GameScene::DrawScore()
+{
+	//各行の数値を描画
+	for (int i = 0; i < 5; i++)
+	{
+		numberSprite_[i]->SetSize({32, 64});
+		numberSprite_[i]->SetTextureRect({0, 0}, {32, 64});
+		numberSprite_[i]->Draw();
 	}
 }
