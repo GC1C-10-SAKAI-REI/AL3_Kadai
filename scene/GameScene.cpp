@@ -1,6 +1,5 @@
 #include "GameScene.h"
 #include "TextureManager.h"
-#include "Stage.h"
 #include <cassert>
 
 //コンストラクタ
@@ -23,10 +22,13 @@ void GameScene::Initialize()
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	//ビュープロジェクションの初期化
+	viewProjection_.Initialize();
+
 	//各クラスの生成
 	stage_ = new Stage();	//ステージ
 	//各クラスの初期化
-	stage_->Initialize();	//ステージ
+	stage_->Initialize(viewProjection_);	//ステージ
 }
 
 //更新
@@ -64,6 +66,8 @@ void GameScene::Draw()
 	Model::PreDraw(commandList);
 
 	// ここから
+
+	stage_->Draw3D();
 
 	// ここまで
 

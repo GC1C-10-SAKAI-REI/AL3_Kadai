@@ -19,6 +19,9 @@ private://メンバ変数
 	Audio *audio_ = nullptr;
 
 	// ゲームシーン用
+	//ビュープロジェクション(共通)
+	ViewProjection viewProjection_;
+
 	// 各クラス
 	Stage *stage_ = nullptr; // ステージ
 

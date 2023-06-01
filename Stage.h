@@ -9,9 +9,17 @@
 class Stage
 {
 private:
+	//ビュープロジェクション(共通)
+	ViewProjection viewProjection_;
+
 	//BG(スプライト)
 	uint32_t BGTexHundle_ = 0;
 	Sprite *BGSprite_ = nullptr;
+
+	//ステージ
+	uint32_t stageTexHundle_ = 0;
+	Model *stageModel_ = nullptr;
+	WorldTransform stageWorldTransform_;
 
 public:
 	//コンストラクタ
@@ -21,11 +29,14 @@ public:
 	~Stage();
 
 	//初期化
-	void Initialize();
+	void Initialize(ViewProjection viewProjection);
 
 	//更新
 	void Update();
 
 	//2D背景描画
 	void Draw2DFar();
+
+	//3D表示
+	void Draw3D();
 };
