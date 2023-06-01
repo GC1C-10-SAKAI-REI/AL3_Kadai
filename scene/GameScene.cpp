@@ -23,6 +23,8 @@ void GameScene::Initialize()
 	audio_ = Audio::GetInstance();
 
 	//ビュープロジェクションの初期化
+	viewProjection_.translation_.y = 1;
+	viewProjection_.translation_.z = -6;
 	viewProjection_.Initialize();
 
 	//各クラスの生成
