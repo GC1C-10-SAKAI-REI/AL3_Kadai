@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "Stage.h"
 
 //ゲームシーン
 class GameScene
@@ -18,7 +19,8 @@ private://メンバ変数
 	Audio *audio_ = nullptr;
 
 	// ゲームシーン用
-
+	// 各クラス
+	Stage *stage_ = nullptr; // ステージ
 
 public://メンバ関数	
 	//コンストクラタ	
