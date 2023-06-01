@@ -9,18 +9,18 @@
 class Stage
 {
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Stage();
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Stage();
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize();
 
-	//XV
+	//æ›´æ–°
 	void Update();
 
-	//2D”wŒi•`‰æ
+	//2DèƒŒæ™¯æç”»
 	void Draw2DFar();
 };
