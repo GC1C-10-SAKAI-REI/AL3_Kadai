@@ -25,12 +25,15 @@ void GameScene::Initialize()
 
 	//各クラスの生成
 	stage_ = new Stage();	//ステージ
+	//各クラスの初期化
+	stage_->Initialize();	//ステージ
 }
 
 //更新
 void GameScene::Update()
 {
-
+	//各クラスの更新
+	stage_->Update();	//ステージ
 }
 
 //描画
@@ -45,7 +48,8 @@ void GameScene::Draw()
 
 	//ここから
 
-
+	//背景の描画
+	stage_->Draw2DFar();
 
 	//ここまで
 
