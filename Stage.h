@@ -8,6 +8,11 @@
 
 class Stage
 {
+private:
+	//BG(スプライト)
+	uint32_t BGTexHundle_ = 0;
+	Sprite *BGSprite_ = nullptr;
+
 public:
 	//コンストラクタ
 	Stage();
