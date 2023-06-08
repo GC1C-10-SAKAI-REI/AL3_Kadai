@@ -8,7 +8,6 @@
 #include "MathUtilityForText.h"
 #include "Input.h"
 
-#pragma once
 class Player
 {
 private:
@@ -17,7 +16,7 @@ private:
 
 	//プレイヤー
 	uint32_t playerTexHundle_ = 0;
-	Model* playerModel_ = nullptr;
+	Model *playerModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
 
 	Input* input_ = nullptr;

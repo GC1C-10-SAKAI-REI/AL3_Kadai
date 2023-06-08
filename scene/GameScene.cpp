@@ -37,6 +37,7 @@ void GameScene::Initialize()
 	//各クラスの初期化
 	stage_->Initialize(viewProjection_);	//ステージ
 	player_->Initialize(viewProjection_);	//プレイヤー
+	beam_->Initialize(viewProjection_);		//ビーム
 }
 
 //更新
@@ -44,7 +45,8 @@ void GameScene::Update()
 {
 	//各クラスの更新
 	stage_->Update();	//ステージ
-	player_->Update();
+	player_->Update();	//プレイヤー
+	beam_->Update();	//弾
 }
 
 //描画
@@ -78,6 +80,7 @@ void GameScene::Draw()
 
 	stage_->Draw3D();
 	player_->Draw3D();
+	beam_->Draw3D();
 
 	// ここまで
 
