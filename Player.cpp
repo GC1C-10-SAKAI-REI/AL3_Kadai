@@ -35,7 +35,7 @@ void Player::Update()
 	{
 		playerWorldTransform_.translation_.x -= 0.1f;
 	}
-
+	//端にいったら止める
 	if (playerWorldTransform_.translation_.x < -4)
 	{
 		playerWorldTransform_.translation_.x = -4;
