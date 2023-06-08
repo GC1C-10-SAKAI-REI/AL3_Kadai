@@ -13,6 +13,7 @@ GameScene::~GameScene()
 {
 	//各クラスの削除
 	delete stage_;
+	delete player_;
 }
 
 //初期化
@@ -29,8 +30,11 @@ void GameScene::Initialize()
 
 	//各クラスの生成
 	stage_ = new Stage();	//ステージ
+	player_ = new Player();	//プレイヤー
+
 	//各クラスの初期化
 	stage_->Initialize(viewProjection_);	//ステージ
+	player_->Initialize(viewProjection_);	//プレイヤー
 }
 
 //更新
@@ -38,6 +42,7 @@ void GameScene::Update()
 {
 	//各クラスの更新
 	stage_->Update();	//ステージ
+	player_->Update();
 }
 
 //描画
@@ -70,6 +75,7 @@ void GameScene::Draw()
 	// ここから
 
 	stage_->Draw3D();
+	player_->Draw3D();
 
 	// ここまで
 
