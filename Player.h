@@ -6,6 +6,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "MathUtilityForText.h"
+#include "Input.h"
 
 #pragma once
 class Player
@@ -18,6 +19,8 @@ private:
 	uint32_t playerTexHundle_ = 0;
 	Model* playerModel_ = nullptr;
 	WorldTransform playerWorldTransform_;
+
+	Input* input_ = nullptr;
 
 public:
 	//コンストラクタ
