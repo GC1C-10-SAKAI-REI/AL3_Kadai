@@ -12,8 +12,9 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	//各クラスの削除
-	delete stage_;
-	delete player_;
+	delete stage_;	//ステージ
+	delete player_;	//プレイヤー
+	delete beam_;	//ビーム
 }
 
 //初期化
@@ -31,6 +32,7 @@ void GameScene::Initialize()
 	//各クラスの生成
 	stage_ = new Stage();	//ステージ
 	player_ = new Player();	//プレイヤー
+	beam_ = new Beam();		//ビーム
 
 	//各クラスの初期化
 	stage_->Initialize(viewProjection_);	//ステージ

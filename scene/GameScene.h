@@ -10,6 +10,7 @@
 #include "WorldTransform.h"
 #include "Stage.h"
 #include "Player.h"
+#include "Beam.h"
 
 //ゲームシーン
 class GameScene
@@ -24,8 +25,9 @@ private://メンバ変数
 	ViewProjection viewProjection_;
 
 	// 各クラス
-	Stage *stage_ = nullptr; // ステージ
-	Player *player_ = nullptr;//プレイヤー
+	Stage *stage_ = nullptr;	// ステージ
+	Player *player_ = nullptr;	//プレイヤー	
+	Beam *beam_ = nullptr;		//弾
 
 public://メンバ関数	
 	//コンストクラタ	
