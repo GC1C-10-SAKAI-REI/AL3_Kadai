@@ -36,4 +36,9 @@ public:
 
 	//2D背景描画
 	void Draw3D();
+
+	//X座標の取得
+	float GetX() { return playerWorldTransform_.translation_.x; }
+	//Z座標の取得
+	float GetZ() { return playerWorldTransform_.translation_.z; }
 };

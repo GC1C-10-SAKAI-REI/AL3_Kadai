@@ -35,9 +35,9 @@ void GameScene::Initialize()
 	beam_ = new Beam();		//ビーム
 
 	//各クラスの初期化
-	stage_->Initialize(viewProjection_);	//ステージ
-	player_->Initialize(viewProjection_);	//プレイヤー
-	beam_->Initialize(viewProjection_);		//ビーム
+	stage_->Initialize(viewProjection_);			//ステージ
+	player_->Initialize(viewProjection_);			//プレイヤー
+	beam_->Initialize(viewProjection_,player_);		//ビーム
 }
 
 //更新

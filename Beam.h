@@ -7,6 +7,7 @@
 #include "WorldTransform.h"
 #include "MathUtilityForText.h"
 #include "Input.h"
+#include "Player.h"
 
 class Beam
 {
@@ -19,6 +20,14 @@ private:
 	Model *beamModel_ = nullptr;
 	WorldTransform beamWorldTransform_;
 
+	//インプットクラス
+	Input *input_ = nullptr;
+	//存在フラグ
+	int aliveFlag_ = 0;
+
+	//プレイヤー
+	Player *player_ = nullptr;
+
 public:
 	// コンストラクタ
 	Beam();
@@ -27,11 +36,17 @@ public:
 	~Beam();
 
 	// 初期化
-	void Initialize(ViewProjection viewProjection);
+	void Initialize(ViewProjection viewProjection, Player *player);
 
 	// 更新
 	void Update();
 
-	// 2D背景描画
+	//移動
+	void Move();
+
+	//発生(発射)
+	void Born();
+
+	// 3D描画
 	void Draw3D();
 };
