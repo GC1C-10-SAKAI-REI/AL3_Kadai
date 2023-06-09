@@ -40,6 +40,7 @@ void GameScene::Initialize()
 	stage_->Initialize(viewProjection_);			//ステージ
 	player_->Initialize(viewProjection_);			//プレイヤー
 	beam_->Initialize(viewProjection_,player_);		//ビーム
+	enemy_->Initialize(viewProjection_);			//敵
 }
 
 //更新
@@ -49,6 +50,7 @@ void GameScene::Update()
 	stage_->Update();	//ステージ
 	player_->Update();	//プレイヤー
 	beam_->Update();	//弾
+	enemy_->Update();
 }
 
 //描画
@@ -83,6 +85,7 @@ void GameScene::Draw()
 	stage_->Draw3D();
 	player_->Draw3D();
 	beam_->Draw3D();
+	enemy_->Draw3D();
 
 	// ここまで
 
