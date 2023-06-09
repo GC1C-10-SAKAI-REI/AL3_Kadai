@@ -11,6 +11,7 @@
 #include "Stage.h"
 #include "Player.h"
 #include "Beam.h"
+#include "Enemy.h"
 
 //ゲームシーン
 class GameScene
@@ -28,6 +29,7 @@ private://メンバ変数
 	Stage *stage_ = nullptr;	// ステージ
 	Player *player_ = nullptr;	//プレイヤー	
 	Beam *beam_ = nullptr;		//弾
+	Enemy *enemy_ = nullptr;	//敵
 
 public://メンバ関数	
 	//コンストクラタ	

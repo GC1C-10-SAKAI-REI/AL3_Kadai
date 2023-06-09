@@ -15,6 +15,7 @@ GameScene::~GameScene()
 	delete stage_;	//ステージ
 	delete player_;	//プレイヤー
 	delete beam_;	//ビーム
+	delete enemy_;	//敵
 }
 
 //初期化
@@ -33,6 +34,7 @@ void GameScene::Initialize()
 	stage_ = new Stage();	//ステージ
 	player_ = new Player();	//プレイヤー
 	beam_ = new Beam();		//ビーム
+	enemy_ = new Enemy();
 
 	//各クラスの初期化
 	stage_->Initialize(viewProjection_);			//ステージ
