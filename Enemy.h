@@ -10,8 +10,21 @@
 class Enemy
 {
 private:
-	ViewProjection view;
+	ViewProjection view_;
 
 public:
-	Enemy()
+	//コンストラクタ
+	Enemy();
+
+	//デストラクタ
+	~Enemy();
+
+	//初期化
+	void Initialize(ViewProjection view);
+
+	//更新
+	void Update();
+
+	//3D描画
+	void Draw3D();
 };
