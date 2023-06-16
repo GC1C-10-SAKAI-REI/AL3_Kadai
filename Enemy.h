@@ -43,6 +43,9 @@ public:
 	//3D描画
 	void Draw3D();
 
+	//衝突処理
+	void Hit() { aliveFlag_ = 0; };
+
 	//X座標の獲得
 	int GetFlag() { return aliveFlag_; }
 };
