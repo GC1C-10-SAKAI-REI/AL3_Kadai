@@ -49,4 +49,15 @@ public:
 
 	// 3D描画
 	void Draw3D();
+
+	// 衝突処理
+	void Hit() { aliveFlag_ = 0; };
+
+	//弾の存在フラグのゲッター
+	int GetFlag() { return aliveFlag_; }
+
+	// X座標の獲得
+	float GetX() { return beamWorldTransform_.translation_.x; }
+	// Z座標の取得
+	float GetZ() { return beamWorldTransform_.translation_.z; }
 };

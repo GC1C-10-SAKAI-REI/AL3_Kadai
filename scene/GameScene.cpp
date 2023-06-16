@@ -46,11 +46,15 @@ void GameScene::Initialize()
 //更新
 void GameScene::Update()
 {
+	//当たり判定
+	CollisionPtoE();
+	CollisionBtoE();
+
 	//各クラスの更新
 	stage_->Update();	//ステージ
 	player_->Update();	//プレイヤー
 	beam_->Update();	//弾
-	enemy_->Update();
+	enemy_->Update();	//敵
 }
 
 //描画
@@ -112,6 +116,33 @@ void GameScene::CollisionPtoE()
 	//敵が存在すれば
 	if (enemy_->GetFlag() == 1)
 	{
+		//差を求める
+		float dx = abs(player_->GetX() - enemy_->GetX());
+		float dz = abs(player_->GetZ() - enemy_->GetZ());
 
+		//衝突したら
+		if (dx < 1 && dz < 1)
+		{
+			enemy_->Hit();
+		}
+	}
+}
+
+void GameScene::CollisionBtoE()
+{
+	// 敵が生きていれば
+	if (enemy_->GetFlag() && beam_->GetFlag())
+	{
+		// 差を求める
+		float dx = abs(beam_->GetX() - enemy_->GetX());
+		float dz = abs(beam_->GetZ() - enemy_->GetZ());
+
+		// 衝突したら
+		if (dx < 1 && dz < 1)
+		{
+			//gamrScore_ += 10;
+			enemy_->Hit();
+			beam_->Hit();
+		}
 	}
 }
