@@ -90,9 +90,16 @@ void GameScene::Draw()
 
 	// ここから
 
+	//ステージ
 	stage_->Draw3D();
-	player_->Draw3D();
+	//自機
+	if (playerLife_ > 0)
+	{
+		player_->Draw3D();
+	}
+	//弾
 	beam_->Draw3D();
+	//敵
 	enemy_->Draw3D();
 
 	// ここまで
