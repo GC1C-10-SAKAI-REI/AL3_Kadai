@@ -107,7 +107,10 @@ void GameScene::Draw()
 
 	// ここから
 
-	debugText_->Print("AAA", 10, 10, 2);
+	//ゲームスコア
+	char str[100];
+	sprintf_s(str, "SCORE : %d", gameScore_);
+	debugText_->Print(str, 200, 10, 2);
 
 	debugText_->DrawAll();
 
@@ -148,7 +151,7 @@ void GameScene::CollisionBtoE()
 		// 衝突したら
 		if (dx < 1 && dz < 1)
 		{
-			//gamrScore_ += 10;
+			gameScore_ += 10;
 			enemy_->Hit();
 			beam_->Hit();
 		}

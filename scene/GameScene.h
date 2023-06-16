@@ -35,6 +35,8 @@ private://メンバ変数
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
 
+	int gameScore_ = 0;//ゲームスコア
+
 public://メンバ関数	
 	//コンストクラタ	
 	GameScene();
