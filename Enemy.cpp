@@ -1,4 +1,4 @@
-#include "Enemy.h"
+ï»¿#include "Enemy.h"
 
 Enemy::Enemy()
 {
@@ -7,13 +7,19 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
-
+	delete enemyModel_;
 }
 
 void Enemy::Initialize(ViewProjection view)
 {
-	//ƒƒ“ƒo[•Ï”‚É‘ã“ü
+	//ãƒ¡ãƒ³ãƒãƒ¼å¤‰æ•°ã«ä»£å…¥
 	view_ = view;
+
+	//æ•µ
+	enemyTexHundle_ = TextureManager::Load("enemy.png");
+	enemyModel_ = Model::Create();
+	enemyWorldTransform_.scale_ = {0.5f, 0.5f, 0.5f};
+	enemyWorldTransform_.Initialize();
 }
 
 void Enemy::Update()
@@ -23,5 +29,5 @@ void Enemy::Update()
 
 void Enemy::Draw3D()
 {
-
+	enemyModel_->Draw(enemyWorldTransform_,view_,enemyTexHundle_);
 }

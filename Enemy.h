@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "DirectXCommon.h"
 #include "Model.h"
 #include "SafeDelete.h"
@@ -12,19 +12,24 @@ class Enemy
 private:
 	ViewProjection view_;
 
+	//æ•µ
+	uint32_t enemyTexHundle_ = 0;
+	Model* enemyModel_ = nullptr;
+	WorldTransform enemyWorldTransform_;
+
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Enemy();
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Enemy();
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Initialize(ViewProjection view);
 
-	//XV
+	//æ›´æ–°
 	void Update();
 
-	//3D•`‰æ
+	//3Dæç”»
 	void Draw3D();
 };
