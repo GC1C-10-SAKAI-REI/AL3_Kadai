@@ -24,6 +24,11 @@ void Enemy::Initialize(ViewProjection view)
 
 void Enemy::Update()
 {
+	//生成
+	Born();
+	//移動
+	Move();
+
 	//変換行列を更新
 	enemyWorldTransform_.matWorld_ = MakeAffineMatrix(
 		enemyWorldTransform_.scale_,
@@ -31,6 +36,33 @@ void Enemy::Update()
 		enemyWorldTransform_.translation_);
 	//変換行列を定数バッファに転送
 	enemyWorldTransform_.TransferMatrix();
+}
+
+void Enemy::Born()
+{
+	if (aliveFlag_ == 0)
+	{
+		// 乱数でX座標の指定
+		int x = rand() % 80;
+		float x2 = (float)x / 10 - 4;
+		enemyWorldTransform_.translation_.x = x2;
+		aliveFlag_ = true;
+		enemyWorldTransform_.translation_.z = 40;
+	}
+}
+
+void Enemy::Move() 
+{
+	if (aliveFlag_ == 1)
+	{
+		enemyWorldTransform_.translation_.z -= 0.3f;
+		enemyWorldTransform_.rotation_.z += 0.2f;
+
+		if (enemyWorldTransform_.translation_.z < -5)
+		{
+			aliveFlag_ = false;
+		}
+	}
 }
 
 void Enemy::Draw3D()

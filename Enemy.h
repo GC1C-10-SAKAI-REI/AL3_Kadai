@@ -10,12 +10,16 @@
 class Enemy
 {
 private:
+	//ビュープロジェクション
 	ViewProjection view_;
 
 	//敵
 	uint32_t enemyTexHundle_ = 0;
 	Model* enemyModel_ = nullptr;
 	WorldTransform enemyWorldTransform_;
+
+	//生存フラグ
+	int aliveFlag_ = 0;
 
 public:
 	//コンストラクタ
@@ -29,6 +33,12 @@ public:
 
 	//更新
 	void Update();
+
+	//発生
+	void Born();
+
+	//移動
+	void Move();
 
 	//3D描画
 	void Draw3D();
