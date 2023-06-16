@@ -25,6 +25,9 @@ void GameScene::Initialize()
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	//デバッグテキスト
+	debugText_ = DebugText::GetInstance();
+
 	//ビュープロジェクションの初期化
 	viewProjection_.translation_.y = 1;
 	viewProjection_.translation_.z = -6;
@@ -41,6 +44,7 @@ void GameScene::Initialize()
 	player_->Initialize(viewProjection_);			//プレイヤー
 	beam_->Initialize(viewProjection_,player_);		//ビーム
 	enemy_->Initialize(viewProjection_);			//敵
+	debugText_->Initialize();						//デバッグテキスト
 }
 
 //更新
@@ -102,6 +106,10 @@ void GameScene::Draw()
 	Sprite::PreDraw(commandList);
 
 	// ここから
+
+	debugText_->Print("AAA", 10, 10, 2);
+
+	debugText_->DrawAll();
 
 	// ここまで
 

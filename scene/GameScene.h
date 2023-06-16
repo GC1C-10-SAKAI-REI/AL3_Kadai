@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Beam.h"
 #include "Enemy.h"
+#include "DebugText.h"
 
 //ゲームシーン
 class GameScene
@@ -30,6 +31,9 @@ private://メンバ変数
 	Player *player_ = nullptr;	//プレイヤー	
 	Beam *beam_ = nullptr;		//弾
 	Enemy *enemy_ = nullptr;	//敵
+
+	//デバッグテキスト
+	DebugText *debugText_ = nullptr;
 
 public://メンバ関数	
 	//コンストクラタ	
