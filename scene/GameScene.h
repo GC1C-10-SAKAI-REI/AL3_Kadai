@@ -46,4 +46,10 @@ public://メンバ関数
 	
 	//描画処理
 	void Draw();
+
+	// 衝突判定(自機と敵)
+	void CollisionPtoE();
+
+	// 衝突判定(ビームと敵)
+	void CollisionBtoE();
 };

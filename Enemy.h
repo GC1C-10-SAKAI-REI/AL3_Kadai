@@ -46,6 +46,11 @@ public:
 	//衝突処理
 	void Hit() { aliveFlag_ = 0; };
 
-	//X座標の獲得
+	//生存フラグ獲得
 	int GetFlag() { return aliveFlag_; }
+
+	//X座標の獲得
+	float GetX() { return enemyWorldTransform_.translation_.x; }
+	//Z座標の取得
+	float GetZ() { return enemyWorldTransform_.translation_.z; }
 };

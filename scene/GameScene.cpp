@@ -106,3 +106,12 @@ void GameScene::Draw()
 
 #pragma endregion
 }
+
+void GameScene::CollisionPtoE()
+{
+	//敵が存在すれば
+	if (enemy_->GetFlag() == 1)
+	{
+
+	}
+}
