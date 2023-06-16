@@ -35,7 +35,8 @@ private://メンバ変数
 	//デバッグテキスト
 	DebugText *debugText_ = nullptr;
 
-	int gameScore_ = 0;//ゲームスコア
+	int gameScore_ = 0;		//ゲームスコア
+	int playerLife_ = 3;	//プレイヤーの残機
 
 public://メンバ関数	
 	//コンストクラタ	

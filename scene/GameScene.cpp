@@ -108,10 +108,15 @@ void GameScene::Draw()
 	// ここから
 
 	//ゲームスコア
-	char str[100];
-	sprintf_s(str, "SCORE : %d", gameScore_);
-	debugText_->Print(str, 200, 10, 2);
+	char score[100];
+	sprintf_s(score, "SCORE : %d", gameScore_);
+	debugText_->Print(score, 200, 10, 2);
+	//プレイヤーライフ
+	char life[100];
+	sprintf_s(life, "LIFE : %d", playerLife_);
+	debugText_->Print(life, 840, 10, 2);
 
+	//デバッグテキストを表示
 	debugText_->DrawAll();
 
 	// ここまで
@@ -135,6 +140,10 @@ void GameScene::CollisionPtoE()
 		if (dx < 1 && dz < 1)
 		{
 			enemy_->Hit();
+			if (playerLife_ > 0)
+			{
+				playerLife_--;
+			}			
 		}
 	}
 }
