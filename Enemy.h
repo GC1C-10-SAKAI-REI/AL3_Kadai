@@ -42,4 +42,7 @@ public:
 
 	//3D描画
 	void Draw3D();
+
+	//X座標の獲得
+	int GetFlag() { return aliveFlag_; }
 };
