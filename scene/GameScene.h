@@ -8,11 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include "Stage.h"
-#include "Player.h"
-#include "Beam.h"
-#include "Enemy.h"
-#include "DebugText.h"
+#include "GamePlay.h"
 
 //ゲームシーン
 class GameScene
@@ -26,17 +22,8 @@ private://メンバ変数
 	//ビュープロジェクション(共通)
 	ViewProjection viewProjection_;
 
-	// 各クラス
-	Stage *stage_ = nullptr;	// ステージ
-	Player *player_ = nullptr;	//プレイヤー	
-	Beam *beam_ = nullptr;		//弾
-	Enemy *enemy_ = nullptr;	//敵
-
-	//デバッグテキスト
-	DebugText *debugText_ = nullptr;
-
-	int gameScore_ = 0;		//ゲームスコア
-	int playerLife_ = 3;	//プレイヤーの残機
+	//ゲームプレイ
+	GamePlay *gamePlay_ = nullptr;
 
 public://メンバ関数	
 	//コンストクラタ	
@@ -53,10 +40,4 @@ public://メンバ関数
 	
 	//描画処理
 	void Draw();
-
-	// 衝突判定(自機と敵)
-	void CollisionPtoE();
-
-	// 衝突判定(ビームと敵)
-	void CollisionBtoE();
 };

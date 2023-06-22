@@ -19,25 +19,43 @@ class GamePlay
 private:
 	ViewProjection view_;
 
+	// 各クラス
+	Stage *stage_ = nullptr;   // ステージ
+	Player *player_ = nullptr; // プレイヤー
+	Beam *beam_ = nullptr;     // 弾
+	Enemy *enemy_ = nullptr;   // 敵
+
+	// デバッグテキスト
+	DebugText* debugText_ = nullptr;
+
+	int gameScore_ = 0;  // ゲームスコア
+	int playerLife_ = 3; // プレイヤーの残機
+
 public:
-	//�R���X�g���N�^
+	//コンストラクタ
 	GamePlay();
 
-	//�f�X�g���N�^
+	//デストラクタ
 	~GamePlay();
 
-	//������
+	//初期化
 	void Initialize();
 
-	//�X�V
+	//更新
 	void Update();
 
-	//2D�w�i�`��
+	//2D背景描画
 	void Draw2Far();
 
-	//3D�`��
+	//3D描画
 	void Draw3D();
 
-	//2D�O�i�`��
+	//2D前景描画
 	void Draw2DNear();
+
+	// 衝突判定(自機と敵)
+	void CollisionPtoE();
+
+	// 衝突判定(ビームと敵)
+	void CollisionBtoE();
 };
