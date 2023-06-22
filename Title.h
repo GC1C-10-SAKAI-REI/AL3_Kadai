@@ -19,6 +19,9 @@ private:
 	uint32_t hitEnterTexHundle_ = 0;
 	Sprite *hitEnterSprite_ = nullptr;
 
+	//エンター点滅用
+	int timer_ = 0;
+
 public:
 	// コンストラクタ
 	Title();
