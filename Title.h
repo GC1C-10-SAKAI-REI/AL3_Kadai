@@ -11,6 +11,14 @@
 
 class Title
 {
+private:
+	//タイトル
+	uint32_t titleTexHundle_ = 0;
+	Sprite *titleSprite_ = nullptr;
+	//ヒットエンターキー
+	uint32_t hitEnterTexHundle_ = 0;
+	Sprite *hitEnterSprite_ = nullptr;
+
 public:
 	// コンストラクタ
 	Title();
