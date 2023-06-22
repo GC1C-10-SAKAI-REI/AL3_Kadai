@@ -34,7 +34,27 @@ void GameScene::Initialize()
 //更新
 void GameScene::Update()
 {
-	gamePlay_->Update();
+	switch (scene_)
+	{
+	case GameScene::TITLE:
+		break;
+
+	case GameScene::GAMEPLAY:
+
+		//ゲームプレイ
+		gamePlay_->Update();
+
+		break;
+
+	case GameScene::GAMEOVER:
+		break;
+
+	case GameScene::GAMECLEAR:
+		break;
+
+	default:
+		break;
+	}
 }
 
 //描画
@@ -49,7 +69,26 @@ void GameScene::Draw()
 
 	//ここから
 
-	gamePlay_->Draw2Far();
+	switch (scene_)
+	{
+	case GameScene::TITLE:
+		break;
+
+	case GameScene::GAMEPLAY:
+
+		gamePlay_->Draw2Far();
+
+		break;
+
+	case GameScene::GAMEOVER:
+		break;
+
+	case GameScene::GAMECLEAR:
+		break;
+
+	default:
+		break;
+	}
 
 	//ここまで
 
@@ -65,7 +104,26 @@ void GameScene::Draw()
 
 	// ここから
 
-	gamePlay_->Draw3D();
+	switch (scene_)
+	{
+	case GameScene::TITLE:
+		break;
+
+	case GameScene::GAMEPLAY:
+
+		gamePlay_->Draw3D();
+
+		break;
+
+	case GameScene::GAMEOVER:
+		break;
+
+	case GameScene::GAMECLEAR:
+		break;
+
+	default:
+		break;
+	}
 
 	// ここまで
 
@@ -79,7 +137,29 @@ void GameScene::Draw()
 
 	// ここから
 
-	gamePlay_->Draw2DNear();
+	switch (scene_)
+	{
+	case GameScene::TITLE:
+		break;
+
+	case GameScene::GAMEPLAY:
+
+		gamePlay_->Draw2DNear();
+
+		break;
+
+	case GameScene::GAMEOVER:
+
+
+
+		break;
+
+	case GameScene::GAMECLEAR:
+		break;
+
+	default:
+		break;
+	}
 
 	// ここまで
 
