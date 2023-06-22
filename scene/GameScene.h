@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "Title.h"
 #include "GamePlay.h"
 
 //ゲームシーン
@@ -22,7 +23,8 @@ private://メンバ変数
 	//ビュープロジェクション(共通)
 	ViewProjection viewProjection_;
 
-	//ゲームプレイ
+	//各シーン
+	Title *title_ = nullptr;
 	GamePlay *gamePlay_ = nullptr;
 
 	//シーン管理用列挙体

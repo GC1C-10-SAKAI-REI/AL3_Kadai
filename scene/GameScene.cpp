@@ -11,6 +11,8 @@ GameScene::GameScene()
 //デストラクタ
 GameScene::~GameScene()
 {
+	//各シーンの消去
+	delete title_;
 	delete gamePlay_;
 }
 
@@ -26,8 +28,12 @@ void GameScene::Initialize()
 	viewProjection_.translation_.z = -6;
 	viewProjection_.Initialize();
 
-	//ゲームプレイクラス
+	//各シーンクラスの生成
+	title_ = new Title();
 	gamePlay_ = new GamePlay();
+
+	//各シーンクラスの初期化
+	title_->Initialize();
 	gamePlay_->Initialize();
 }
 
@@ -37,13 +43,14 @@ void GameScene::Update()
 	switch (scene_)
 	{
 	case GameScene::TITLE:
+
+		title_->Update();
 		break;
 
 	case GameScene::GAMEPLAY:
 
 		//ゲームプレイ
 		gamePlay_->Update();
-
 		break;
 
 	case GameScene::GAMEOVER:
