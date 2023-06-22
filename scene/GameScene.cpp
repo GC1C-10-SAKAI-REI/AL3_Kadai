@@ -147,12 +147,13 @@ void GameScene::Draw()
 	switch (scene_)
 	{
 	case GameScene::TITLE:
+
+		title_->Draw2DNear();
 		break;
 
 	case GameScene::GAMEPLAY:
 
 		gamePlay_->Draw2DNear();
-
 		break;
 
 	case GameScene::GAMEOVER:
