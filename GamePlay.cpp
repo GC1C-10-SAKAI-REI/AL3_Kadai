@@ -36,9 +36,13 @@ void GamePlay::Initialize(ViewProjection view)
 	debugText_->Initialize();                    // デバッグテキスト
 }
 
-void GamePlay::Start(Scene& scene)
+void GamePlay::Start()
 {
-
+	player_->Start();
+	beam_->Start();
+	enemy_->Start();
+	playerLife_ = 3;
+	gameScore_ = 0;
 }
 
 void GamePlay::Update(Scene& scene)

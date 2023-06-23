@@ -22,6 +22,16 @@ void Enemy::Initialize(ViewProjection view)
 	enemyWorldTransform_.Initialize();
 }
 
+void Enemy::Start()
+{
+	aliveFlag_ = 0;
+	// 乱数でX座標の指定
+	int x = rand() % 80;
+	float x2 = (float)x / 10 - 4;
+	enemyWorldTransform_.translation_.x = x2;
+	enemyWorldTransform_.translation_.z = 40;
+}
+
 void Enemy::Update()
 {
 	//生成

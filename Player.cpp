@@ -24,6 +24,11 @@ void Player::Initialize(ViewProjection viewProjection)
 	input_ = Input::GetInstance();
 }
 
+void Player::Start()
+{
+	playerWorldTransform_.translation_.x = 0;
+}
+
 void Player::Update()
 {
 	//キーによる移動処理

@@ -43,7 +43,7 @@ public:
 	void Initialize(ViewProjection view);
 
 	//
-	void Start(Scene& scene);
+	void Start();
 
 	//更新
 	void Update(Scene &scene);

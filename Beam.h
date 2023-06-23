@@ -38,6 +38,9 @@ public:
 	// 初期化
 	void Initialize(ViewProjection viewProjection, Player *player);
 
+	//
+	void Start();
+
 	// 更新
 	void Update();
 

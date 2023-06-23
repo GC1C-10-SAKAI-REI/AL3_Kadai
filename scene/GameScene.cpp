@@ -80,7 +80,7 @@ void GameScene::Update()
 		switch (scene_)
 		{
 		case SceneEnum::GAMEPLAY:
-
+			gamePlay_->Start();
 
 			break;
 		}

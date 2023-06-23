@@ -31,6 +31,9 @@ public:
 	//初期化
 	void Initialize(ViewProjection viewProjection);
 
+	//
+	void Start();
+
 	//更新
 	void Update();
 

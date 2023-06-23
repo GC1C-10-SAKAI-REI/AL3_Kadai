@@ -27,6 +27,11 @@ void Beam::Initialize(ViewProjection viewProjection,Player *player)
 	input_ = Input::GetInstance();
 }
 
+void Beam::Start()
+{
+	aliveFlag_ = 0;
+}
+
 void Beam::Update()
 {
 	Born();
