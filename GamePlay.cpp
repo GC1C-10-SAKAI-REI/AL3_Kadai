@@ -36,7 +36,7 @@ void GamePlay::Initialize(ViewProjection view)
 	debugText_->Initialize();                    // デバッグテキスト
 }
 
-void GamePlay::Update()
+void GamePlay::Update(Scene& scene)
 {
 	// 当たり判定
 	CollisionPtoE();
@@ -47,6 +47,11 @@ void GamePlay::Update()
 	player_->Update(); // プレイヤー
 	beam_->Update();   // 弾
 	enemy_->Update();  // 敵
+
+	if (playerLife_ < 1)
+	{
+		scene = GAMEOVER;
+	}
 }
 
 void GamePlay::Draw2Far()

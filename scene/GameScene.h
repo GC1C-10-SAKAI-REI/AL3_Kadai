@@ -11,6 +11,7 @@
 #include "SceneEnum.h"
 #include "Title.h"
 #include "GamePlay.h"
+#include "GameOver.h"
 
 //ゲームシーン
 class GameScene : public SceneEnum
@@ -27,6 +28,7 @@ private://メンバ変数
 	//各シーン
 	Title *title_ = nullptr;
 	GamePlay *gamePlay_ = nullptr;
+	GameOver* gameOver_ = nullptr;
 	//
 	SceneEnum* sEnum_ = nullptr;
 

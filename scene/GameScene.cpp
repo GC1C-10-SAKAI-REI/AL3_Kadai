@@ -14,6 +14,7 @@ GameScene::~GameScene()
 	//各シーンの消去
 	delete title_;
 	delete gamePlay_;
+	delete gameOver_;
 	delete sEnum_;
 }
 
@@ -32,11 +33,13 @@ void GameScene::Initialize()
 	//各シーンクラスの生成
 	title_ = new Title();
 	gamePlay_ = new GamePlay();
+	gameOver_ = new GameOver();
 	sEnum_ = new SceneEnum();
 
 	//各シーンクラスの初期化
 	title_->Initialize();
 	gamePlay_->Initialize(viewProjection_);
+	gameOver_->Initialize(viewProjection_);
 
 	scene_ = TITLE;
 }
@@ -54,10 +57,12 @@ void GameScene::Update()
 	case GameScene::GAMEPLAY:
 
 		//ゲームプレイ
-		gamePlay_->Update();
+		gamePlay_->Update(scene_);
 		break;
 
 	case GameScene::GAMEOVER:
+
+		gameOver_->Update(scene_);
 		break;
 
 	case GameScene::GAMECLEAR:
@@ -92,6 +97,9 @@ void GameScene::Draw()
 		break;
 
 	case GameScene::GAMEOVER:
+
+		gamePlay_->Draw2Far();
+
 		break;
 
 	case GameScene::GAMECLEAR:
@@ -127,6 +135,9 @@ void GameScene::Draw()
 		break;
 
 	case GameScene::GAMEOVER:
+
+		gamePlay_->Draw3D();
+
 		break;
 
 	case GameScene::GAMECLEAR:
@@ -162,7 +173,7 @@ void GameScene::Draw()
 
 	case GameScene::GAMEOVER:
 
-
+		gameOver_->Draw2DNear();
 
 		break;
 

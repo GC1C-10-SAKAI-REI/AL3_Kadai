@@ -43,7 +43,7 @@ public:
 	void Initialize(ViewProjection view);
 
 	//更新
-	void Update();
+	void Update(Scene &scene);
 
 	//2D背景描画
 	void Draw2Far();

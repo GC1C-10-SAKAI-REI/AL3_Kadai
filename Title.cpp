@@ -49,5 +49,5 @@ void Title::Draw2DNear()
 	if (timer_ % 40 >= 20)
 	{
 		hitEnterSprite_->Draw();
-	}	
+	}
 }
