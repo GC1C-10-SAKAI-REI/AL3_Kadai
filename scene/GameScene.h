@@ -29,7 +29,7 @@ private://メンバ変数
 	Title *title_ = nullptr;
 	GamePlay *gamePlay_ = nullptr;
 	GameOver* gameOver_ = nullptr;
-	//
+	//シーン管理用列挙体クラス
 	SceneEnum* sEnum_ = nullptr;
 
 public://メンバ関数	

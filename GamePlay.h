@@ -18,6 +18,7 @@
 class GamePlay : public SceneEnum
 {
 private:
+	//ビュープロジェクション
 	ViewProjection view_;
 
 	// 各クラス

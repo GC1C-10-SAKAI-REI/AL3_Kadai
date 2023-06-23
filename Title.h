@@ -19,9 +19,9 @@ private:
 	//ヒットエンターキー
 	uint32_t hitEnterTexHundle_ = 0;
 	Sprite *hitEnterSprite_ = nullptr;
-	//
+	// シーン管理用列挙体クラス
 	SceneEnum *sEnum = nullptr;
-
+	//入力クラス
 	Input* input_ = nullptr;
 
 	//エンター点滅用

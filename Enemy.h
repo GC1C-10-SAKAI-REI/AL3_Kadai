@@ -31,7 +31,7 @@ public:
 	//初期化
 	void Initialize(ViewProjection view);
 
-	//
+	// 2周目以降の初期化処理
 	void Start();
 
 	//更新
