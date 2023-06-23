@@ -47,6 +47,8 @@ void GameScene::Initialize()
 //更新
 void GameScene::Update()
 {
+	Scene oldScene = scene_;
+
 	switch (scene_)
 	{
 	case GameScene::TITLE:
@@ -70,6 +72,18 @@ void GameScene::Update()
 
 	default:
 		break;
+	}
+
+	//シーン変更ならば
+	if (oldScene != scene_)
+	{
+		switch (scene_)
+		{
+		case SceneEnum::GAMEPLAY:
+
+
+			break;
+		}
 	}
 }
 

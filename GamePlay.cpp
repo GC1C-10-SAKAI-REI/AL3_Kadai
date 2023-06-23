@@ -36,6 +36,11 @@ void GamePlay::Initialize(ViewProjection view)
 	debugText_->Initialize();                    // デバッグテキスト
 }
 
+void GamePlay::Start(Scene& scene)
+{
+
+}
+
 void GamePlay::Update(Scene& scene)
 {
 	// 当たり判定
