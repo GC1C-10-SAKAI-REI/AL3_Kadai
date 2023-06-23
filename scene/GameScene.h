@@ -35,7 +35,7 @@ private://メンバ変数
 		GAMEOVER,
 		GAMECLEAR
 	};
-	Scene scene_ = TITLE;
+	Scene scene_ = GAMEPLAY;
 
 public://メンバ関数	
 	//コンストクラタ	

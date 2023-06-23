@@ -14,15 +14,13 @@ GamePlay::~GamePlay()
 	delete enemy_;  // 敵
 }
 
-void GamePlay::Initialize()
+void GamePlay::Initialize(ViewProjection view)
 {
 	// デバッグテキスト
 	debugText_ = DebugText::GetInstance();
 
 	//ビュープロジェクションの初期化
-	view_.translation_.y = 1;
-	view_.translation_.z = -6;
-	view_.Initialize();
+	view_ = view;
 
 	// 各クラスの生成
 	stage_ = new Stage();   // ステージ

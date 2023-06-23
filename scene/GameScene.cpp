@@ -34,7 +34,7 @@ void GameScene::Initialize()
 
 	//各シーンクラスの初期化
 	title_->Initialize();
-	gamePlay_->Initialize();
+	gamePlay_->Initialize(viewProjection_);
 }
 
 //更新

@@ -39,7 +39,7 @@ public:
 	~GamePlay();
 
 	//初期化
-	void Initialize();
+	void Initialize(ViewProjection view);
 
 	//更新
 	void Update();
