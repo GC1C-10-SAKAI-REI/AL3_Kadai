@@ -14,6 +14,7 @@ GameScene::~GameScene()
 	//各シーンの消去
 	delete title_;
 	delete gamePlay_;
+	delete sEnum_;
 }
 
 //初期化
@@ -31,10 +32,13 @@ void GameScene::Initialize()
 	//各シーンクラスの生成
 	title_ = new Title();
 	gamePlay_ = new GamePlay();
+	sEnum_ = new SceneEnum();
 
 	//各シーンクラスの初期化
 	title_->Initialize();
 	gamePlay_->Initialize(viewProjection_);
+
+	scene_ = TITLE;
 }
 
 //更新
@@ -44,7 +48,7 @@ void GameScene::Update()
 	{
 	case GameScene::TITLE:
 
-		title_->Update();
+		title_->Update(scene_);
 		break;
 
 	case GameScene::GAMEPLAY:

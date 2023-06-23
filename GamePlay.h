@@ -13,8 +13,9 @@
 #include "Beam.h"
 #include "Enemy.h"
 #include "DebugText.h"
+#include "SceneEnum.h"
 
-class GamePlay
+class GamePlay : public SceneEnum
 {
 private:
 	ViewProjection view_;

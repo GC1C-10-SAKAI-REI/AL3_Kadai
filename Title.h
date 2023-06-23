@@ -8,8 +8,9 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "SceneEnum.h"
 
-class Title
+class Title : public SceneEnum
 {
 private:
 	//タイトル
@@ -18,6 +19,10 @@ private:
 	//ヒットエンターキー
 	uint32_t hitEnterTexHundle_ = 0;
 	Sprite *hitEnterSprite_ = nullptr;
+	//
+	SceneEnum *sEnum = nullptr;
+
+	Input* input_ = nullptr;
 
 	//エンター点滅用
 	int timer_ = 0;
@@ -33,7 +38,7 @@ public:
 	void Initialize();
 
 	// 更新
-	void Update();
+	void Update(Scene &scene);
 
 	// 2D前景描画
 	void Draw2DNear();

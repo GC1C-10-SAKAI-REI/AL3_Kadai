@@ -8,11 +8,12 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "SceneEnum.h"
 #include "Title.h"
 #include "GamePlay.h"
 
 //ゲームシーン
-class GameScene
+class GameScene : public SceneEnum
 {
 private://メンバ変数
 	DirectXCommon *dxCommon_ = nullptr;
@@ -26,16 +27,8 @@ private://メンバ変数
 	//各シーン
 	Title *title_ = nullptr;
 	GamePlay *gamePlay_ = nullptr;
-
-	//シーン管理用列挙体
-	enum Scene
-	{
-		TITLE,
-		GAMEPLAY,
-		GAMEOVER,
-		GAMECLEAR
-	};
-	Scene scene_ = GAMEPLAY;
+	//
+	SceneEnum* sEnum_ = nullptr;
 
 public://メンバ関数	
 	//コンストクラタ	
