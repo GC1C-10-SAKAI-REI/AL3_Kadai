@@ -46,7 +46,10 @@ void GamePlay::Initialize(ViewProjection view)
 	// プレイヤー
 	player_->Initialize(view_);
 	// ビーム
-	beam_->Initialize(view_, player_);
+	for (Beam* beam : beams_)
+	{
+		beam->Initialize(view_, player_);
+	}	
 	// 敵
 	for (Enemy* enemy : enemys_)
 	{
