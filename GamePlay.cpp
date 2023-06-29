@@ -1,8 +1,12 @@
 #include "GamePlay.h"
 
-GamePlay::GamePlay() {}
+GamePlay::GamePlay()
+{
 
-GamePlay::~GamePlay() {
+}
+
+GamePlay::~GamePlay()
+{
 	// 各クラスの削除
 	delete stage_;  // ステージ
 	delete player_; // プレイヤー
@@ -14,7 +18,8 @@ GamePlay::~GamePlay() {
 	}
 }
 
-void GamePlay::Initialize(ViewProjection view) {
+void GamePlay::Initialize(ViewProjection view)
+{
 	// デバッグテキスト
 	debugText_ = DebugText::GetInstance();
 
@@ -25,7 +30,8 @@ void GamePlay::Initialize(ViewProjection view) {
 	stage_ = new Stage();   // ステージ
 	player_ = new Player(); // プレイヤー
 	beam_ = new Beam();     // ビーム
-	for (int i = 0; i < remainEnemys_; i++) {
+	for (int i = 0; i < remainEnemys_; i++)
+	{
 		enemys_[i] = new Enemy(); // 敵
 	}
 
@@ -37,22 +43,33 @@ void GamePlay::Initialize(ViewProjection view) {
 	// ビーム
 	beam_->Initialize(view_, player_);
 	// 敵
-	for (Enemy* enemy : enemys_) {
+	for (Enemy* enemy : enemys_)
+	{
 		enemy->Initialize(view_);
 	}
 	// デバッグテキスト
 	debugText_->Initialize();
 }
 
-void GamePlay::Start() {
+void GamePlay::Start()
+{
+	//プレイヤー
 	player_->Start();
+	//ビーム
 	beam_->Start();
-	enemy_->Start();
+	//敵
+	for (Enemy *enemy : enemys_)
+	{
+		enemy->Start();
+	}
+	//プレイヤーライフ
 	playerLife_ = 3;
+	//ゲームスコア
 	gameScore_ = 0;
 }
 
-void GamePlay::Update(Scene& scene) {
+void GamePlay::Update(Scene& scene)
+{
 	// 当たり判定
 	CollisionPtoE();
 	CollisionBtoE();
@@ -63,21 +80,25 @@ void GamePlay::Update(Scene& scene) {
 	beam_->Update();   // 弾
 	enemy_->Update();  // 敵
 
-	if (playerLife_ < 1) {
+	if (playerLife_ < 1)
+	{
 		scene = GAMEOVER;
 	}
 }
 
-void GamePlay::Draw2Far() {
+void GamePlay::Draw2Far()
+{
 	// 背景の描画
 	stage_->Draw2DFar();
 }
 
-void GamePlay::Draw3D() {
+void GamePlay::Draw3D()
+{
 	// ステージ
 	stage_->Draw3D();
 	// 自機
-	if (playerLife_ > 0) {
+	if (playerLife_ > 0)
+	{
 		player_->Draw3D();
 	}
 	// 弾
@@ -86,7 +107,8 @@ void GamePlay::Draw3D() {
 	enemy_->Draw3D();
 }
 
-void GamePlay::Draw2DNear() {
+void GamePlay::Draw2DNear()
+{
 	// ゲームスコア
 	char score[100];
 	sprintf_s(score, "SCORE : %d", gameScore_);
@@ -100,32 +122,39 @@ void GamePlay::Draw2DNear() {
 	debugText_->DrawAll();
 }
 
-void GamePlay::CollisionPtoE() {
+void GamePlay::CollisionPtoE()
+{
 	// 敵が存在すれば
-	if (enemy_->GetFlag() == 1) {
+	if (enemy_->GetFlag() == 1)
+	{
 		// 差を求める
 		float dx = abs(player_->GetX() - enemy_->GetX());
 		float dz = abs(player_->GetZ() - enemy_->GetZ());
 
 		// 衝突したら
-		if (dx < 1 && dz < 1) {
+		if (dx < 1 && dz < 1)
+		{
 			enemy_->Hit();
-			if (playerLife_ > 0) {
+			if (playerLife_ > 0)
+			{
 				playerLife_--;
 			}
 		}
 	}
 }
 
-void GamePlay::CollisionBtoE() {
+void GamePlay::CollisionBtoE()
+{
 	// 敵が生きていれば
-	if (enemy_->GetFlag() && beam_->GetFlag()) {
+	if (enemy_->GetFlag() && beam_->GetFlag())
+	{
 		// 差を求める
 		float dx = abs(beam_->GetX() - enemy_->GetX());
 		float dz = abs(beam_->GetZ() - enemy_->GetZ());
 
 		// 衝突したら
-		if (dx < 1 && dz < 1) {
+		if (dx < 1 && dz < 1)
+		{
 			gameScore_ += 10;
 			enemy_->Hit();
 			beam_->Hit();
