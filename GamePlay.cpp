@@ -39,9 +39,9 @@ void GamePlay::Initialize(ViewProjection view)
 	// ビーム
 	beam_->Initialize(view_, player_);
 	// 敵
-	for (int i = 0; i < remainEnemys_; i++)
+	for (Enemy *enemy : enemys_)
 	{
-		enemys_[i]->Initialize(view_);
+		enemy->Initialize(view_);
 	}
 	// デバッグテキスト
 	debugText_->Initialize();
