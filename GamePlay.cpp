@@ -10,7 +10,11 @@ GamePlay::~GamePlay()
 	// 各クラスの削除
 	delete stage_;  // ステージ
 	delete player_; // プレイヤー
-	delete beam_;   // ビーム
+	// ビーム
+	for (Beam* beam : beams_)
+	{
+		delete beam;
+	}	
 	// 敵
 	for (Enemy* enemy : enemys_)
 	{
@@ -177,19 +181,21 @@ void GamePlay::CollisionBtoE()
 {
 	for (Enemy *enemy : enemys_)
 	{
-		// 敵が生きていれば
-		if (enemy->GetFlag() && beam_->GetFlag()) {
-			// 差を求める
-			float dx = abs(beam_->GetX() - enemy->GetX());
-			float dz = abs(beam_->GetZ() - enemy->GetZ());
+		for (Beam* beam : beams_)
+		{
+			// 敵が生きていれば
+			if (enemy->GetFlag() && beam->GetFlag()) {
+				// 差を求める
+				float dx = abs(beam->GetX() - enemy->GetX());
+				float dz = abs(beam->GetZ() - enemy->GetZ());
 
-			// 衝突したら
-			if (dx < 1 && dz < 1)
-			{
-				gameScore_ += 10;
-				enemy->Hit();
-				beam_->Hit();
+				// 衝突したら
+				if (dx < 1 && dz < 1) {
+					gameScore_ += 10;
+					enemy->Hit();
+					beam->Hit();
+				}
 			}
-		}
+		}		
 	}
 }
