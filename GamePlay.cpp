@@ -91,7 +91,10 @@ void GamePlay::Update(Scene& scene)
 	// プレイヤー
 	player_->Update();
 	// 弾
-	beam_->Update();
+	for (Beam* beam : beams_)
+	{
+		beam->Update();
+	}	
 	// 敵
 	for (Enemy* enemy : enemys_)
 	{
