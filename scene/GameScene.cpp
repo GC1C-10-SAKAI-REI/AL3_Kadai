@@ -60,6 +60,7 @@ void GameScene::Update()
 
 		//ゲームプレイ
 		gamePlay_->Update(scene_);
+		gamePlay_->Shot();
 		break;
 
 	case GameScene::GAMEOVER:

@@ -36,8 +36,11 @@ private:
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
 
+	Input *input_ = nullptr;
+
 	int gameScore_ = 0;  // ゲームスコア
 	int playerLife_ = 3; // プレイヤーの残機
+	int interval_ = 0;
 
 public:
 	//コンストラクタ

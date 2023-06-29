@@ -61,6 +61,9 @@ void GamePlay::Initialize(ViewProjection view)
 	}
 	// デバッグテキスト
 	debugText_->Initialize();
+
+	// インプットクラス
+	input_ = Input::GetInstance();
 }
 
 void GamePlay::Start()
@@ -85,7 +88,36 @@ void GamePlay::Start()
 
 void GamePlay::Shot()
 {
-
+	if (interval_ == 0)
+	{
+		// スペースキーを押したら
+		if (input_->PushKey(DIK_SPACE))
+		{
+			// ビームでループ
+			for (Beam* beam : beams_)
+			{
+				// 存在しなければ
+				if (beam->GetFlag() == 0)
+				{
+					beam->Born();
+					beam->Update();
+					interval_ = 1;
+					break;
+				}
+			}
+		}		
+	}
+	else // 発射出来ない状態
+	{
+		// タイマー加算
+		interval_++;
+		// 一定時間で
+		if (interval_ > 5)
+		{
+			// 発射できる状態
+			interval_ = 0;
+		}
+	}
 }
 
 void GamePlay::Update(Scene& scene)
