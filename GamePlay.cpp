@@ -134,20 +134,23 @@ void GamePlay::Draw2DNear()
 
 void GamePlay::CollisionPtoE()
 {
-	// 敵が存在すれば
-	if (enemy_->GetFlag() == 1)
+	for (Enemy *enemy : enemys_)
 	{
-		// 差を求める
-		float dx = abs(player_->GetX() - enemy_->GetX());
-		float dz = abs(player_->GetZ() - enemy_->GetZ());
-
-		// 衝突したら
-		if (dx < 1 && dz < 1)
+		// 敵が存在すれば
+		if (enemy->GetFlag() == 1)
 		{
-			enemy_->Hit();
-			if (playerLife_ > 0)
+			// 差を求める
+			float dx = abs(player_->GetX() - enemy->GetX());
+			float dz = abs(player_->GetZ() - enemy->GetZ());
+
+			// 衝突したら
+			if (dx < 1 && dz < 1)
 			{
-				playerLife_--;
+				enemy->Hit();
+				if (playerLife_ > 0)
+				{
+					playerLife_--;
+				}
 			}
 		}
 	}
@@ -155,19 +158,21 @@ void GamePlay::CollisionPtoE()
 
 void GamePlay::CollisionBtoE()
 {
-	// 敵が生きていれば
-	if (enemy_->GetFlag() && beam_->GetFlag())
+	for (Enemy *enemy : enemys_)
 	{
-		// 差を求める
-		float dx = abs(beam_->GetX() - enemy_->GetX());
-		float dz = abs(beam_->GetZ() - enemy_->GetZ());
+		// 敵が生きていれば
+		if (enemy->GetFlag() && beam_->GetFlag()) {
+			// 差を求める
+			float dx = abs(beam_->GetX() - enemy->GetX());
+			float dz = abs(beam_->GetZ() - enemy->GetZ());
 
-		// 衝突したら
-		if (dx < 1 && dz < 1)
-		{
-			gameScore_ += 10;
-			enemy_->Hit();
-			beam_->Hit();
+			// 衝突したら
+			if (dx < 1 && dz < 1)
+			{
+				gameScore_ += 10;
+				enemy->Hit();
+				beam_->Hit();
+			}
 		}
 	}
 }
