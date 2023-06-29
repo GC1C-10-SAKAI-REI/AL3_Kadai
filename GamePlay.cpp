@@ -85,9 +85,8 @@ void GamePlay::Update(Scene& scene)
 	for (Enemy* enemy : enemys_)
 	{
 		enemy->Update();
-	}
-	
-
+	}	
+	//ゲームオーバー遷移条件
 	if (playerLife_ < 1)
 	{
 		scene = GAMEOVER;
@@ -112,7 +111,10 @@ void GamePlay::Draw3D()
 	// 弾
 	beam_->Draw3D();
 	// 敵
-	enemy_->Draw3D();
+	for (Enemy *enemy : enemys_)
+	{
+		enemy->Draw3D();
+	}
 }
 
 void GamePlay::Draw2DNear()
