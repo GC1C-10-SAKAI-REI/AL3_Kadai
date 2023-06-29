@@ -34,7 +34,7 @@ void Beam::Start()
 
 void Beam::Update()
 {
-	Born();
+	//Born();
 	 
 	Move();
 

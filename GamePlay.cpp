@@ -83,6 +83,11 @@ void GamePlay::Start()
 	gameScore_ = 0;
 }
 
+void GamePlay::Shot()
+{
+
+}
+
 void GamePlay::Update(Scene& scene)
 {
 	// 各当たり判定

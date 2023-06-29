@@ -52,6 +52,9 @@ public:
 	//2周目以降の初期化
 	void Start();
 
+	//
+	void Shot();
+
 	//更新
 	void Update(Scene &scene);
 
