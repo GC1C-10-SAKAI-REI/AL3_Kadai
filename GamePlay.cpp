@@ -29,10 +29,15 @@ void GamePlay::Initialize(ViewProjection view)
 	// 各クラスの生成
 	stage_ = new Stage();   // ステージ
 	player_ = new Player(); // プレイヤー
-	beam_ = new Beam();     // ビーム
+	// ビーム
+	for (int i = 0; i < magazine_; i++)
+	{
+		beams_[i] = new Beam();
+	}
+	// 敵(生成の際はインスタンスが出来てないので普通のfor文を使う)
 	for (int i = 0; i < remainEnemys_; i++)
 	{
-		enemys_[i] = new Enemy(); // 敵
+		enemys_[i] = new Enemy(); 
 	}
 
 	// 各クラスの初期化

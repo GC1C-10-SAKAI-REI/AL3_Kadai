@@ -50,14 +50,17 @@ void Enemy::Update()
 
 void Enemy::Born()
 {
-	if (aliveFlag_ == 0)
+	if (rand() % 10 == 0)
 	{
-		// 乱数でX座標の指定
-		int x = rand() % 80;
-		float x2 = (float)x / 10 - 4;
-		enemyWorldTransform_.translation_.x = x2;
-		aliveFlag_ = true;
-		enemyWorldTransform_.translation_.z = 40;
+		if (aliveFlag_ == 0)
+		{
+			// 乱数でX座標の指定
+			int x = rand() % 80;
+			float x2 = (float)x / 10 - 4;
+			enemyWorldTransform_.translation_.x = x2;
+			aliveFlag_ = true;
+			enemyWorldTransform_.translation_.z = 40;
+		}
 	}
 }
 
@@ -68,7 +71,7 @@ void Enemy::Move()
 		enemyWorldTransform_.translation_.z -= 0.3f;
 		enemyWorldTransform_.rotation_.z += 0.2f;
 
-		if (enemyWorldTransform_.translation_.z < -5)
+		if (enemyWorldTransform_.translation_.z < -7)
 		{
 			aliveFlag_ = false;
 		}

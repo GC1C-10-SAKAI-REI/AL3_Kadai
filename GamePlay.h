@@ -22,11 +22,16 @@ private:
 	ViewProjection view_;
 
 	// 各クラス
-	Stage *stage_ = nullptr;   // ステージ
-	Player *player_ = nullptr; // プレイヤー
-	Beam *beam_ = nullptr;     // 弾
+	// ステージ
+	Stage *stage_ = nullptr;
+	// プレイヤー
+	Player *player_ = nullptr;
+	// 弾
+	static const int magazine_ = 10;
+	Beam* beams_[magazine_] = {};
+	// 敵
 	static const int remainEnemys_ = 10;
-	Enemy* enemys_[remainEnemys_] = {}; // 敵
+	Enemy* enemys_[remainEnemys_] = {};
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
