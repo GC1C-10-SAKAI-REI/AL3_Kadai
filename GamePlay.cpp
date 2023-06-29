@@ -26,14 +26,25 @@ void GamePlay::Initialize(ViewProjection view)
 	stage_ = new Stage();   // ステージ
 	player_ = new Player(); // プレイヤー
 	beam_ = new Beam();     // ビーム
-	enemy_ = new Enemy();   // 敵
+	for (int i = 0; i < remainEnemys_; i++)
+	{
+		enemys_[i] = new Enemy(); // 敵
+	}
 
 	// 各クラスの初期化
-	stage_->Initialize(view_);                   // ステージ
-	player_->Initialize(view_);                  // プレイヤー
-	beam_->Initialize(view_, player_);           // ビーム
-	enemy_->Initialize(view_);                   // 敵
-	debugText_->Initialize();                    // デバッグテキスト
+	// ステージ
+	stage_->Initialize(view_);
+	// プレイヤー
+	player_->Initialize(view_);
+	// ビーム
+	beam_->Initialize(view_, player_);
+	// 敵
+	for (int i = 0; i < remainEnemys_; i++)
+	{
+		enemys_[i]->Initialize(view_);
+	}
+	// デバッグテキスト
+	debugText_->Initialize();
 }
 
 void GamePlay::Start()
