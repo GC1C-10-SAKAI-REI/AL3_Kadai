@@ -25,7 +25,8 @@ private:
 	Stage *stage_ = nullptr;   // ステージ
 	Player *player_ = nullptr; // プレイヤー
 	Beam *beam_ = nullptr;     // 弾
-	Enemy *enemy_ = nullptr;   // 敵
+	static const int remainEnemys_ = 10;
+	Enemy* enemys_[remainEnemys_] = {}; // 敵
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
