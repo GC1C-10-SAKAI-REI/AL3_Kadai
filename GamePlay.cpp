@@ -123,7 +123,10 @@ void GamePlay::Draw3D()
 		player_->Draw3D();
 	}
 	// 弾
-	beam_->Draw3D();
+	for (Beam* beam : beams_)
+	{
+		beam->Draw3D();
+	}	
 	// 敵
 	for (Enemy *enemy : enemys_)
 	{
