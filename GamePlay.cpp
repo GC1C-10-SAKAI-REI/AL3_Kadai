@@ -70,15 +70,23 @@ void GamePlay::Start()
 
 void GamePlay::Update(Scene& scene)
 {
-	// 当たり判定
+	// 各当たり判定
 	CollisionPtoE();
 	CollisionBtoE();
 
 	// 各クラスの更新
-	stage_->Update();  // ステージ
-	player_->Update(); // プレイヤー
-	beam_->Update();   // 弾
-	enemy_->Update();  // 敵
+	// ステージ
+	stage_->Update();
+	// プレイヤー
+	player_->Update();
+	// 弾
+	beam_->Update();
+	// 敵
+	for (Enemy* enemy : enemys_)
+	{
+		enemy->Update();
+	}
+	
 
 	if (playerLife_ < 1)
 	{
