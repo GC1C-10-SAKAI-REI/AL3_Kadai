@@ -64,7 +64,10 @@ void GamePlay::Start()
 	//プレイヤー
 	player_->Start();
 	//ビーム
-	beam_->Start();
+	for (Beam *beam : beams_)
+	{
+		beam->Start();
+	}	
 	//敵
 	for (Enemy *enemy : enemys_)
 	{
