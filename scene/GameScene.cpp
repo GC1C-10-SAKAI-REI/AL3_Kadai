@@ -82,6 +82,11 @@ void GameScene::Update()
 	{
 		switch (scene_)
 		{
+		case SceneEnum::TITLE:
+			title_->BGMPlay();
+
+			break;
+
 		case SceneEnum::GAMEPLAY:
 			gamePlay_->Start();
 
