@@ -77,10 +77,22 @@ void Enemy::Move()
 {
 	if (aliveFlag_ == 1)
 	{
+		//基本の移動(前進)
 		enemyWorldTransform_.translation_.z -= 0.3f;
 		enemyWorldTransform_.rotation_.z += 0.2f;
+		//斜め移動
+		enemyWorldTransform_.translation_.x += enemySpdX_;
+		//端にぶつかったら反転
+		if (enemyWorldTransform_.translation_.x > 4)
+		{
+			enemySpdX_ *= -1;
+		}
+		else if(enemyWorldTransform_.translation_.x < -4)
+		{
+			enemySpdX_ *= -1;
+		}
 
-		if (enemyWorldTransform_.translation_.z < -7)
+		if (enemyWorldTransform_.translation_.z < -5)
 		{
 			aliveFlag_ = false;
 		}
