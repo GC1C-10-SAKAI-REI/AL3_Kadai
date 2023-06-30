@@ -11,7 +11,8 @@ Title::~Title()
 	delete titleSprite_;
 	//ヒットエンターキー
 	delete hitEnterSprite_;
-	delete sEnum;
+	//列挙体
+	delete sEnum_;
 }
 
 void Title::Initialize()
@@ -22,9 +23,18 @@ void Title::Initialize()
 	//ヒットエンターキー
 	hitEnterTexHundle_ = TextureManager::Load("enter.png");
 	hitEnterSprite_ = Sprite::Create(hitEnterTexHundle_, {400, 360});
+	//サウンドデータの読み込み
+	audio_ = Audio::GetInstance();
+	bgmSoundHundle_ = audio_->LoadWave("Audio/Ring05.wav");
 
 	// インプットクラス
 	input_ = Input::GetInstance();
+}
+
+void Title::BGMPlay()
+{
+	//BGMを再生
+	bgmPlayHundle_ = audio_->PlayWave(bgmSoundHundle_, true);
 }
 
 void Title::Update(Scene &scene)

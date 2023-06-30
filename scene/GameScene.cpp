@@ -42,6 +42,8 @@ void GameScene::Initialize()
 	gameOver_->Initialize(viewProjection_);
 
 	scene_ = TITLE;
+
+	title_->BGMPlay();
 }
 
 //更新
