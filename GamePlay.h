@@ -34,8 +34,10 @@ private:
 	Enemy* enemys_[remainEnemys_] = {};
 	// サウンド
 	Audio* audio_ = nullptr;
-	uint32_t bgmSoundHundle_ = 0; // BGM
-	uint32_t bgmPlayHundle_ = 0;  // 音声再生ハンドル
+	uint32_t bgmSoundHundle_ = 0;	// BGM
+	uint32_t bgmPlayHundle_ = 0;	// 音声再生ハンドル
+	uint32_t seDamagedHundle_ = 0;	// 自機被弾SE
+	uint32_t seBeamHitHundle_ = 0;	// 弾ヒットSE
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
@@ -62,7 +64,7 @@ public:
 	// サウンド開始
 	void BGMPlay();
 
-	//
+	//弾発射用
 	void Shot();
 
 	//更新

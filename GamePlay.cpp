@@ -65,6 +65,8 @@ void GamePlay::Initialize(ViewProjection view)
 	// サウンドデータの読み込み
 	audio_ = Audio::GetInstance();
 	bgmSoundHundle_ = audio_->LoadWave("Audio/Ring08.wav");
+	seDamagedHundle_ = audio_->LoadWave("Audio/chord.wav");
+	seBeamHitHundle_ = audio_->LoadWave("Audio/tada.wav");
 
 	// インプットクラス
 	input_ = Input::GetInstance();
@@ -220,6 +222,7 @@ void GamePlay::CollisionPtoE()
 			if (dx < 1 && dz < 1)
 			{
 				enemy->Hit();
+				audio_->PlayWave(seDamagedHundle_);
 				if (playerLife_ > 0)
 				{
 					playerLife_--;
@@ -236,16 +239,19 @@ void GamePlay::CollisionBtoE()
 		for (Beam* beam : beams_)
 		{
 			// 敵が生きていれば
-			if (enemy->GetFlag() && beam->GetFlag()) {
+			if (enemy->GetFlag() && beam->GetFlag())
+			{
 				// 差を求める
 				float dx = abs(beam->GetX() - enemy->GetX());
 				float dz = abs(beam->GetZ() - enemy->GetZ());
 
 				// 衝突したら
-				if (dx < 1 && dz < 1) {
-					gameScore_ += 10;
+				if (dx < 1 && dz < 1)
+				{
 					enemy->Hit();
 					beam->Hit();
+					audio_->PlayWave(seBeamHitHundle_);
+					gameScore_ += 10;
 				}
 			}
 		}		
