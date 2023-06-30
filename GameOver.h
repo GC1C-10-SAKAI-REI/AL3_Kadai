@@ -19,6 +19,10 @@ private:
 	// ヒットエンターキー
 	uint32_t hitEnterTexHundle_ = 0;
 	Sprite* hitEnterSprite_ = nullptr;
+	// サウンド
+	Audio* audio_ = nullptr;
+	uint32_t bgmSoundHundle_ = 0; // BGM
+	uint32_t bgmPlayHundle_ = 0;  // 音声再生ハンドル
 	// シーン管理用列挙体クラス
 	SceneEnum* sEnum = nullptr;
 	//入力クラス
@@ -36,6 +40,9 @@ public:
 
 	// 初期化
 	void Initialize(ViewProjection view);
+
+	// サウンド開始
+	void BGMPlay();
 
 	// 更新
 	void Update(Scene& scene);

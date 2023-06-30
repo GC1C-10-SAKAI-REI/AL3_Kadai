@@ -62,12 +62,12 @@ void GamePlay::Initialize(ViewProjection view)
 	// デバッグテキスト
 	debugText_->Initialize();
 
-	// インプットクラス
-	input_ = Input::GetInstance();
-
 	// サウンドデータの読み込み
 	audio_ = Audio::GetInstance();
 	bgmSoundHundle_ = audio_->LoadWave("Audio/Ring08.wav");
+
+	// インプットクラス
+	input_ = Input::GetInstance();
 }
 
 void GamePlay::Start()

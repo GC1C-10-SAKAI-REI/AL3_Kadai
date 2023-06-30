@@ -69,12 +69,6 @@ void GameScene::Update()
 
 		gameOver_->Update(scene_);
 		break;
-
-	case GameScene::GAMECLEAR:
-		break;
-
-	default:
-		break;
 	}
 
 	//シーン変更ならば
@@ -94,6 +88,7 @@ void GameScene::Update()
 			break;
 
 		case SceneEnum::GAMEOVER:
+			gameOver_->BGMPlay();
 			gamePlay_->Start();
 
 			break;
