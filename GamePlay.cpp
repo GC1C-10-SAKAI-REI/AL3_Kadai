@@ -171,7 +171,10 @@ void GamePlay::Draw3D()
 	// 敵
 	for (Enemy *enemy : enemys_)
 	{
-		enemy->Draw3D();
+		if (enemy->GetFlag() == 1)
+		{
+			enemy->Draw3D();
+		}		
 	}
 }
 
