@@ -32,6 +32,10 @@ private:
 	// 敵
 	static const int remainEnemys_ = 10;
 	Enemy* enemys_[remainEnemys_] = {};
+	// サウンド
+	Audio* audio_ = nullptr;
+	uint32_t bgmSoundHundle_ = 0; // BGM
+	uint32_t bgmPlayHundle_ = 0;  // 音声再生ハンドル
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
@@ -54,6 +58,9 @@ public:
 
 	//2周目以降の初期化
 	void Start();
+
+	// サウンド開始
+	void BGMPlay();
 
 	//
 	void Shot();

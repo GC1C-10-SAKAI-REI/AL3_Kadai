@@ -88,6 +88,12 @@ void GameScene::Update()
 			break;
 
 		case SceneEnum::GAMEPLAY:
+			gamePlay_->BGMPlay();
+			gamePlay_->Start();
+
+			break;
+
+		case SceneEnum::GAMEOVER:
 			gamePlay_->Start();
 
 			break;

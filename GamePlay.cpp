@@ -64,6 +64,10 @@ void GamePlay::Initialize(ViewProjection view)
 
 	// インプットクラス
 	input_ = Input::GetInstance();
+
+	// サウンドデータの読み込み
+	audio_ = Audio::GetInstance();
+	bgmSoundHundle_ = audio_->LoadWave("Audio/Ring08.wav");
 }
 
 void GamePlay::Start()
@@ -84,6 +88,12 @@ void GamePlay::Start()
 	playerLife_ = 3;
 	//ゲームスコア
 	gameScore_ = 0;
+}
+
+void GamePlay::BGMPlay()
+{
+	// BGMを再生
+	bgmPlayHundle_ = audio_->PlayWave(bgmSoundHundle_, true);
 }
 
 void GamePlay::Shot()
@@ -144,6 +154,8 @@ void GamePlay::Update(Scene& scene)
 	//ゲームオーバー遷移条件
 	if (playerLife_ < 1)
 	{
+		// 現在のBGMを停止
+		audio_->StopWave(bgmPlayHundle_);
 		scene = GAMEOVER;
 	}
 }
