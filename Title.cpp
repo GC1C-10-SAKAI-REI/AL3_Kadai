@@ -43,6 +43,9 @@ void Title::Update(Scene &scene)
 
 	if (input_->TriggerKey(DIK_RETURN))
 	{
+		//現在のBGMを停止
+		audio_->StopWave(bgmPlayHundle_);
+		//ゲームプレイへ移行
 		scene = GAMEPLAY;
 	}
 	else
