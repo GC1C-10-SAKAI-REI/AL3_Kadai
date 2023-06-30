@@ -20,6 +20,8 @@ private:
 
 	//生存フラグ
 	int aliveFlag_ = 0;
+	//斜め移動の際のX成分
+	float enemySpdX_ = 0.0f;
 
 public:
 	//コンストラクタ

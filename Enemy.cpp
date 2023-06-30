@@ -60,6 +60,15 @@ void Enemy::Born()
 			enemyWorldTransform_.translation_.x = x2;
 			aliveFlag_ = true;
 			enemyWorldTransform_.translation_.z = 40;
+			//Born内でX成分の抽選
+			if (rand() % 2 == 0)
+			{
+				enemySpdX_ = 0.1f;
+			}
+			else
+			{
+				enemySpdX_ = -0.1f;
+			}
 		}
 	}
 }
