@@ -45,7 +45,23 @@ void Stage::Initialize(ViewProjection viewProjection)
 
 void Stage::Update()
 {
-
+	for (int i = 0; i < floorNum; i++)
+	{
+		// 手前に移動
+		stageWorldTransform_[i].translation_.z -= 0.1f;
+		// 端まで来たら奥へ戻る
+		if (stageWorldTransform_[i].translation_.z < -5)
+		{
+			stageWorldTransform_[i].translation_.z += 40;
+		}
+		// 変換行列を更新
+		stageWorldTransform_[i].matWorld_ = MakeAffineMatrix(
+		    stageWorldTransform_[i].scale_,
+			stageWorldTransform_[i].rotation_,
+		    stageWorldTransform_[i].translation_);
+		// 変換行列を定数バッファに転送
+		stageWorldTransform_[i].TransferMatrix();
+	}
 }
 
 void Stage::Draw2DFar()
