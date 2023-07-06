@@ -21,7 +21,7 @@ void Stage::Initialize(ViewProjection viewProjection)
 	BGSprite_ = Sprite::Create(BGTexHundle_, {0, 0});
 
 	//ステージ
-	stageTexHundle_ = TextureManager::Load("stage.jpg");
+	stageTexHundle_ = TextureManager::Load("stage2.jpg");
 	stageModel_ = Model::Create();
 	for (int i = 0; i < floorNum; i++)
 	{
