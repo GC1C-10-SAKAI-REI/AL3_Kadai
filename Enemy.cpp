@@ -38,6 +38,8 @@ void Enemy::Update()
 	Born();
 	//移動
 	Move();
+	//
+	EnemyDelete();
 
 	//変換行列を更新
 	enemyWorldTransform_.matWorld_ = MakeAffineMatrix(
@@ -54,12 +56,15 @@ void Enemy::Born()
 	{
 		if (aliveFlag_ == 0)
 		{
+			aliveFlag_ = true;
 			// 乱数でX座標の指定
 			int x = rand() % 80;
 			float x2 = (float)x / 10 - 4;
+
 			enemyWorldTransform_.translation_.x = x2;
-			aliveFlag_ = true;
+			enemyWorldTransform_.translation_.y = 0;
 			enemyWorldTransform_.translation_.z = 40;
+
 			//Born内でX成分の抽選
 			if (rand() % 2 == 0)
 			{
@@ -93,6 +98,24 @@ void Enemy::Move()
 		}
 
 		if (enemyWorldTransform_.translation_.z < -5)
+		{
+			aliveFlag_ = false;
+		}
+	}
+}
+
+void Enemy::EnemyDelete()
+{
+	if (aliveFlag_ == 2)
+	{
+		// 移動
+		enemyWorldTransform_.translation_.y += jampSpd_;
+		// 速度を減らす
+		jampSpd_ -= 0.1f;
+		// 斜め移動
+		enemyWorldTransform_.translation_.x += enemySpdX_ * 3;
+		// 下に落ちると消滅
+		if (enemyWorldTransform_.translation_.y < -3)
 		{
 			aliveFlag_ = false;
 		}

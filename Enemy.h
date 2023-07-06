@@ -22,6 +22,8 @@ private:
 	int aliveFlag_ = 0;
 	//斜め移動の際のX成分
 	float enemySpdX_ = 0.0f;
+	//ジャンプのスピード
+	float jampSpd_ = 0;
 
 public:
 	//コンストラクタ
@@ -45,11 +47,14 @@ public:
 	//移動
 	void Move();
 
+	//死亡演出
+	void EnemyDelete();
+
 	//3D描画
 	void Draw3D();
 
 	//衝突処理
-	void Hit() { aliveFlag_ = 0; };
+	void Hit() { aliveFlag_ = 2; jampSpd_ = 1; }
 
 	//生存フラグ獲得
 	int GetFlag() { return aliveFlag_; }

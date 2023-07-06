@@ -185,7 +185,7 @@ void GamePlay::Draw3D()
 	// 敵
 	for (Enemy *enemy : enemys_)
 	{
-		if (enemy->GetFlag() == 1)
+		if (enemy->GetFlag() != 0)
 		{
 			enemy->Draw3D();
 		}		
@@ -239,7 +239,7 @@ void GamePlay::CollisionBtoE()
 		for (Beam* beam : beams_)
 		{
 			// 敵が生きていれば
-			if (enemy->GetFlag() && beam->GetFlag())
+			if (enemy->GetFlag() == 1 && beam->GetFlag())
 			{
 				// 差を求める
 				float dx = abs(beam->GetX() - enemy->GetX());
