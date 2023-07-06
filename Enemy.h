@@ -39,13 +39,13 @@ public:
 	void Start();
 
 	//更新
-	void Update();
+	void Update(int dTimer);
 
 	//発生
 	void Born();
 
 	//移動
-	void Move();
+	void Move(int dTimer);
 
 	//死亡演出
 	void EnemyDelete();

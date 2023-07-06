@@ -90,6 +90,8 @@ void GamePlay::Start()
 	playerLife_ = 3;
 	//ゲームスコア
 	gameScore_ = 0;
+	// 難易度設定用タイマー
+	difficultyTimer = 0;
 }
 
 void GamePlay::BGMPlay()
@@ -138,6 +140,8 @@ void GamePlay::Update(Scene& scene)
 	CollisionPtoE();
 	CollisionBtoE();
 
+	difficultyTimer++;
+
 	// 各クラスの更新
 	// ステージ
 	stage_->Update();
@@ -151,7 +155,7 @@ void GamePlay::Update(Scene& scene)
 	// 敵
 	for (Enemy* enemy : enemys_)
 	{
-		enemy->Update();
+		enemy->Update(difficultyTimer);
 	}	
 	//ゲームオーバー遷移条件
 	if (playerLife_ < 1)

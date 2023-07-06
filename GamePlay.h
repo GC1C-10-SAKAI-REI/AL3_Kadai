@@ -44,9 +44,10 @@ private:
 
 	Input *input_ = nullptr;
 
-	int gameScore_ = 0;  // ゲームスコア
-	int playerLife_ = 3; // プレイヤーの残機
+	int gameScore_ = 0;			// ゲームスコア
+	int playerLife_ = 3;		// プレイヤーの残機
 	int interval_ = 0;
+	int difficultyTimer = 0;	// 難易度設定用タイマー
 
 public:
 	//コンストラクタ

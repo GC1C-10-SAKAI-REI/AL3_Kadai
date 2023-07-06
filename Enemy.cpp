@@ -24,6 +24,7 @@ void Enemy::Initialize(ViewProjection view)
 
 void Enemy::Start()
 {
+	//死亡フラグのリセット
 	aliveFlag_ = 0;
 	// 乱数でX座標の指定
 	int x = rand() % 80;
@@ -32,13 +33,13 @@ void Enemy::Start()
 	enemyWorldTransform_.translation_.z = 40;
 }
 
-void Enemy::Update()
+void Enemy::Update(int dTimer)
 {
 	//生成
 	Born();
 	//移動
-	Move();
-	//
+	Move(dTimer);
+	//死亡演出
 	EnemyDelete();
 
 	//変換行列を更新
@@ -78,13 +79,15 @@ void Enemy::Born()
 	}
 }
 
-void Enemy::Move() 
+void Enemy::Move(int dTimer)
 {
 	if (aliveFlag_ == 1)
 	{
-		//基本の移動(前進)
-		enemyWorldTransform_.translation_.z -= 0.2f;
+		//移動(前進)
+		enemyWorldTransform_.translation_.z -= dTimer / 1000.0f;
+		//回転
 		enemyWorldTransform_.rotation_.z += 0.2f;
+		enemyWorldTransform_.rotation_.z += dTimer / 10000.0f;
 		//斜め移動
 		enemyWorldTransform_.translation_.x += enemySpdX_;
 		//端にぶつかったら反転
