@@ -20,7 +20,7 @@ private:
 	//ステージ
 	uint32_t stageTexHundle_ = 0;
 	Model *stageModel_ = nullptr;
-	WorldTransform stageWorldTransform_;
+	WorldTransform stageWorldTransform_[20];
 
 public:
 	//コンストラクタ
