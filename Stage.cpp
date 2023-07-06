@@ -23,18 +23,24 @@ void Stage::Initialize(ViewProjection viewProjection)
 	//ステージ
 	stageTexHundle_ = TextureManager::Load("stage.jpg");
 	stageModel_ = Model::Create();
-	stageWorldTransform_.Initialize();
-
-	// ステージの位置を変更
-	stageWorldTransform_.translation_ = {0, -1.5f, 0};
-	stageWorldTransform_.scale_ = {4.5f, 1, 40};
-	// 変換行列を更新
-	stageWorldTransform_.matWorld_ = MakeAffineMatrix(
-	    stageWorldTransform_.scale_,
-		stageWorldTransform_.rotation_,
-	    stageWorldTransform_.translation_);
-	// 変換行列を定数バッファに転送
-	stageWorldTransform_.TransferMatrix();
+	for (int i = 0; i < floorNum; i++)
+	{
+		stageWorldTransform_[i].Initialize();
+	}	
+	//床の数だけ回す
+	for (int i = 0; i < floorNum; i++)
+	{
+		// ステージの位置を変更
+		stageWorldTransform_[i].translation_ = {0, -1.5f, 2.0f * i - 5};
+		stageWorldTransform_[i].scale_ = {4.5f, 1, 1};
+		// 変換行列を更新
+		stageWorldTransform_[i].matWorld_ = MakeAffineMatrix(
+		    stageWorldTransform_[i].scale_,
+			stageWorldTransform_[i].rotation_,
+		    stageWorldTransform_[i].translation_);
+		// 変換行列を定数バッファに転送
+		stageWorldTransform_[i].TransferMatrix();
+	}
 }
 
 void Stage::Update()
@@ -50,6 +56,9 @@ void Stage::Draw2DFar()
 
 void Stage::Draw3D()
 {
-	//ステージ
-	stageModel_->Draw(stageWorldTransform_, viewProjection_, stageTexHundle_);
+	for (int i = 0; i < floorNum; i++)
+	{
+		// ステージ
+		stageModel_->Draw(stageWorldTransform_[i], viewProjection_, stageTexHundle_);
+	}	
 }

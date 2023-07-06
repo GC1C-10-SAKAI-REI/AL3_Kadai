@@ -20,7 +20,9 @@ private:
 	//ステージ
 	uint32_t stageTexHundle_ = 0;
 	Model *stageModel_ = nullptr;
-	WorldTransform stageWorldTransform_[20];
+	//床の数
+	static const int floorNum = 20;
+	WorldTransform stageWorldTransform_[floorNum];
 
 public:
 	//コンストラクタ
