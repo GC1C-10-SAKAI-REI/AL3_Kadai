@@ -179,11 +179,23 @@ void GamePlay::Update(Scene& scene)
 
 void GamePlay::DrawScore()
 {
+	//各桁の値を取り出す
+	int eachNumber[5] = {};
+	int number = gameScore_;
+
+	int keta = 10000;
+	for (int i = 0; i < 5; i++)
+	{
+		eachNumber[i] = number / keta;
+		number = number % keta;
+		keta = keta / 10;
+	}
+
 	//各桁の数値を描画
 	for (int i = 0; i < 5; i++)
 	{
 		numberSprite_[i]->SetSize({32, 64});
-		numberSprite_[i]->SetTextureRect({0, 0}, {32, 64});
+		numberSprite_[i]->SetTextureRect({32.0f * eachNumber[i], 0}, {32, 64});
 		numberSprite_[i]->Draw();
 	}
 }

@@ -50,7 +50,7 @@ void Title::Update(Scene &scene)
 	}
 	else
 	{
-		scene_ = TITLE;
+		scene = TITLE;
 	}
 }
 

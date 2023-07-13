@@ -50,7 +50,7 @@ void GameOver::Update(Scene& scene)
 	}
 	else
 	{
-		scene_ = GAMEOVER;
+		scene = GAMEOVER;
 	}
 }
 
