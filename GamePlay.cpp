@@ -20,6 +20,7 @@ GamePlay::~GamePlay()
 	{
 		delete enemy;
 	}
+	//スコア数値の絵
 	for (int i = 0; i < 5; i++)
 	{
 		delete numberSprite_[i];
@@ -69,6 +70,9 @@ void GamePlay::Initialize(ViewProjection view)
 	{
 		numberSprite_[i] = Sprite::Create(numberTexhundle_, {300.0f + i * 26, 0});
 	}
+	//スコア文字
+	scoreTexHundle_ = TextureManager::Load("score.png");
+	scoreSprite_ = Sprite::Create(scoreTexHundle_, {170, 0});
 
 	// デバッグテキスト
 	debugText_->Initialize();
@@ -198,6 +202,8 @@ void GamePlay::DrawScore()
 		numberSprite_[i]->SetTextureRect({32.0f * eachNumber[i], 0}, {32, 64});
 		numberSprite_[i]->Draw();
 	}
+	//スコア文字
+	scoreSprite_->Draw();
 }
 
 void GamePlay::Draw2Far()
@@ -233,10 +239,8 @@ void GamePlay::Draw3D()
 void GamePlay::Draw2DNear()
 {
 	// ゲームスコア
-	/*char score[100];
-	sprintf_s(score, "SCORE : %d", gameScore_);
-	debugText_->Print(score, 200, 10, 2);*/
 	DrawScore();
+
 	// プレイヤーライフ
 	char life[100];
 	sprintf_s(life, "LIFE : %d", playerLife_);

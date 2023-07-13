@@ -41,7 +41,11 @@ private:
 
 	//スコア数値
 	uint32_t numberTexhundle_ = 0;
-	Sprite* numberSprite_[5] = {};
+	Sprite *numberSprite_[5] = {};
+
+	//スコア文字の表示
+	uint32_t scoreTexHundle_ = 0;
+	Sprite *scoreSprite_ = nullptr;
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
