@@ -11,5 +11,6 @@ protected:
 		GAMEOVER,
 		GAMECLEAR
 	};
+	//switch文に突っ込むようの変数
 	Scene scene_;
 };

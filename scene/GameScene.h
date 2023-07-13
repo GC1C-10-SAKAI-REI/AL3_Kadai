@@ -28,9 +28,9 @@ private://メンバ変数
 	//各シーン
 	Title *title_ = nullptr;
 	GamePlay *gamePlay_ = nullptr;
-	GameOver* gameOver_ = nullptr;
+	GameOver *gameOver_ = nullptr;
 	//シーン管理用列挙体クラス
-	SceneEnum* sEnum_ = nullptr;
+	SceneEnum *sEnum_ = nullptr;
 
 public://メンバ関数	
 	//コンストクラタ	

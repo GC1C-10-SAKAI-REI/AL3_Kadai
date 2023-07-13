@@ -11,8 +11,6 @@ GameOver::~GameOver()
 	delete gameoverSprite_;
 	//エンターキー
 	delete hitEnterSprite_;
-	//
-	delete sEnum;
 }
 
 void GameOver::Initialize(ViewProjection view)
@@ -38,7 +36,7 @@ void GameOver::BGMPlay()
 	bgmPlayHundle_ = audio_->PlayWave(bgmSoundHundle_, true);
 }
 
-void GameOver::Update(Scene& scene)
+void GameOver::Update(Scene &scene)
 {
 	timer_++;
 

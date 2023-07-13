@@ -23,8 +23,6 @@ private:
 	Audio *audio_ = nullptr;
 	uint32_t bgmSoundHundle_ = 0;	//BGM
 	uint32_t bgmPlayHundle_ = 0;	//音声再生ハンドル
-	// シーン管理用列挙体クラス
-	SceneEnum *sEnum_ = nullptr;
 	//入力クラス
 	Input* input_ = nullptr;
 

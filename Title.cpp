@@ -11,8 +11,6 @@ Title::~Title()
 	delete titleSprite_;
 	//ヒットエンターキー
 	delete hitEnterSprite_;
-	//列挙体
-	delete sEnum_;
 }
 
 void Title::Initialize()

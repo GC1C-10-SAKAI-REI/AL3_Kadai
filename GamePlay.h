@@ -45,7 +45,7 @@ private:
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
-
+	// 入力クラス
 	Input *input_ = nullptr;
 
 	int gameScore_ = 0;			// ゲームスコア
