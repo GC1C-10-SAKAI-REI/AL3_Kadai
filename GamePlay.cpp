@@ -25,6 +25,8 @@ GamePlay::~GamePlay()
 	{
 		delete numberSprite_[i];
 	}
+	// スコア文字
+	delete scoreSprite_;
 }
 
 void GamePlay::Initialize(ViewProjection view)
