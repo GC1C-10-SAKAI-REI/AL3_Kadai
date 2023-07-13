@@ -20,6 +20,11 @@ GamePlay::~GamePlay()
 	{
 		delete enemy;
 	}
+	//
+	for (int i = 0; i < 3; i++)
+	{
+		delete pLifeSprite[i];
+	}
 	//スコア数値の絵
 	for (int i = 0; i < 5; i++)
 	{
@@ -65,6 +70,14 @@ void GamePlay::Initialize(ViewProjection view)
 	for (Enemy* enemy : enemys_)
 	{
 		enemy->Initialize(view_);
+	}
+
+	//プレイヤーライフのスプライト
+	pLifeTexHundle_ = TextureManager::Load("player.png");
+	for (int i = 0; i < 3; i++)
+	{
+		pLifeSprite[i] = Sprite::Create(pLifeTexHundle_, {800.0f + i * 60, 20});
+		pLifeSprite[i]->SetSize({40, 40});
 	}
 	//スコア数値
 	numberTexhundle_ = TextureManager::Load("number.png");
@@ -183,6 +196,14 @@ void GamePlay::Update(Scene &scene)
 	}
 }
 
+void GamePlay::DrawPlayerLife()
+{
+	for (int i = 0; i < playerLife_; i++)
+	{
+		pLifeSprite[i]->Draw();
+	}
+}
+
 void GamePlay::DrawScore()
 {
 	//各桁の値を取り出す
@@ -242,14 +263,7 @@ void GamePlay::Draw2DNear()
 {
 	// ゲームスコア
 	DrawScore();
-
-	// プレイヤーライフ
-	char life[100];
-	sprintf_s(life, "LIFE : %d", playerLife_);
-	debugText_->Print(life, 840, 10, 2);
-
-	// デバッグテキストを表示
-	debugText_->DrawAll();
+	DrawPlayerLife();
 }
 
 void GamePlay::CollisionPtoE()

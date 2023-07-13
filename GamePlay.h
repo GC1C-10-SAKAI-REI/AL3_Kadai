@@ -84,6 +84,9 @@ public:
 	//更新
 	void Update(Scene &scene);
 
+	//
+	void DrawPlayerLife();
+
 	//スコア数値の描画
 	void DrawScore();
 
