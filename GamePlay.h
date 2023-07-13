@@ -39,6 +39,10 @@ private:
 	uint32_t seDamagedHundle_ = 0;	// 自機被弾SE
 	uint32_t seBeamHitHundle_ = 0;	// 弾ヒットSE
 
+	//スコア数値
+	uint32_t numberTexhundle_ = 0;
+	Sprite* numberSprite_[5] = {};
+
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
 

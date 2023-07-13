@@ -20,6 +20,10 @@ GamePlay::~GamePlay()
 	{
 		delete enemy;
 	}
+	for (int i = 0; i < 5; i++)
+	{
+		delete numberSprite_[i];
+	}
 }
 
 void GamePlay::Initialize(ViewProjection view)
@@ -59,6 +63,13 @@ void GamePlay::Initialize(ViewProjection view)
 	{
 		enemy->Initialize(view_);
 	}
+	//スコア数値
+	numberTexhundle_ = TextureManager::Load("number.png");
+	for (int i = 0; i < 5; i++)
+	{
+		numberSprite_[i] = Sprite::Create(numberTexhundle_, {300.0f + i * 26, 0});
+	}
+
 	// デバッグテキスト
 	debugText_->Initialize();
 
