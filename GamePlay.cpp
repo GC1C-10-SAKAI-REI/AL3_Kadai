@@ -177,6 +177,17 @@ void GamePlay::Update(Scene& scene)
 	}
 }
 
+void GamePlay::DrawScore()
+{
+	//各桁の数値を描画
+	for (int i = 0; i < 5; i++)
+	{
+		numberSprite_[i]->SetSize({32, 64});
+		numberSprite_[i]->SetTextureRect({0, 0}, {32, 64});
+		numberSprite_[i]->Draw();
+	}
+}
+
 void GamePlay::Draw2Far()
 {
 	// 背景の描画
@@ -210,9 +221,10 @@ void GamePlay::Draw3D()
 void GamePlay::Draw2DNear()
 {
 	// ゲームスコア
-	char score[100];
+	/*char score[100];
 	sprintf_s(score, "SCORE : %d", gameScore_);
-	debugText_->Print(score, 200, 10, 2);
+	debugText_->Print(score, 200, 10, 2);*/
+	DrawScore();
 	// プレイヤーライフ
 	char life[100];
 	sprintf_s(life, "LIFE : %d", playerLife_);

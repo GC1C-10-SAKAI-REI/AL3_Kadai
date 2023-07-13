@@ -75,6 +75,9 @@ public:
 	//更新
 	void Update(Scene &scene);
 
+	//スコア数値の描画
+	void DrawScore();
+
 	//2D背景描画
 	void Draw2Far();
 
