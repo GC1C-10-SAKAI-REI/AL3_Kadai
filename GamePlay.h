@@ -32,12 +32,10 @@ private:
 	// 敵
 	static const int remainEnemys_ = 10;
 	Enemy* enemys_[remainEnemys_] = {};
-	// サウンド
-	Audio* audio_ = nullptr;
-	uint32_t bgmSoundHundle_ = 0;	// BGM
-	uint32_t bgmPlayHundle_ = 0;	// 音声再生ハンドル
-	uint32_t seDamagedHundle_ = 0;	// 自機被弾SE
-	uint32_t seBeamHitHundle_ = 0;	// 弾ヒットSE
+
+	//プレイヤーライフのスプライト
+	uint32_t pLifeTexHundle_ = 0;
+	Sprite *pLifeSprite[3] = {};
 
 	//スコア数値
 	uint32_t numberTexhundle_ = 0;
@@ -46,6 +44,13 @@ private:
 	//スコア文字の表示
 	uint32_t scoreTexHundle_ = 0;
 	Sprite *scoreSprite_ = nullptr;
+
+	// サウンド
+	Audio* audio_ = nullptr;
+	uint32_t bgmSoundHundle_ = 0;	// BGM
+	uint32_t bgmPlayHundle_ = 0;	// 音声再生ハンドル
+	uint32_t seDamagedHundle_ = 0;	// 自機被弾SE
+	uint32_t seBeamHitHundle_ = 0;	// 弾ヒットSE
 
 	// デバッグテキスト
 	DebugText* debugText_ = nullptr;
