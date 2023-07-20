@@ -60,7 +60,8 @@ private:
 	int gameScore_ = 0;			// ゲームスコア
 	int playerLife_ = 3;		// プレイヤーの残機
 	int interval_ = 0;
-	int difficultyTimer = 0;	// 難易度設定用タイマー
+	int difficultyTimer_ = 0;	// 難易度設定用タイマー
+	int playerTimer_ = 0;
 
 public:
 	//コンストラクタ

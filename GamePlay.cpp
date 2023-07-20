@@ -121,7 +121,9 @@ void GamePlay::Start()
 	//ゲームスコア
 	gameScore_ = 0;
 	// 難易度設定用タイマー
-	difficultyTimer = 0;
+	difficultyTimer_ = 0;
+	//
+	playerTimer_ = 0;
 }
 
 void GamePlay::BGMPlay()
@@ -166,11 +168,16 @@ void GamePlay::Shot()
 
 void GamePlay::Update(Scene &scene)
 {
+	if (playerTimer_ > 0)
+	{
+		playerTimer_--;
+	}
+
 	// 各当たり判定
 	CollisionPtoE();
 	CollisionBtoE();
 
-	difficultyTimer++;
+	difficultyTimer_++;
 
 	// 各クラスの更新
 	// ステージ
@@ -185,7 +192,7 @@ void GamePlay::Update(Scene &scene)
 	// 敵
 	for (Enemy* enemy : enemys_)
 	{
-		enemy->Update(difficultyTimer);
+		enemy->Update(difficultyTimer_);
 	}	
 	//ゲームオーバー遷移条件
 	if (playerLife_ < 1)
@@ -242,7 +249,10 @@ void GamePlay::Draw3D()
 	// 自機
 	if (playerLife_ > 0)
 	{
-		player_->Draw3D();
+		if (playerTimer_ % 4 < 2)
+		{
+			player_->Draw3D();
+		}		
 	}
 	// 弾
 	for (Beam* beam : beams_)
@@ -282,6 +292,7 @@ void GamePlay::CollisionPtoE()
 			{
 				enemy->Hit();
 				audio_->PlayWave(seDamagedHundle_);
+				playerTimer_ = 60;
 				if (playerLife_ > 0)
 				{
 					playerLife_--;
