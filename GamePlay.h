@@ -29,11 +29,9 @@ private:
 	Player *player_ = nullptr;
 	// 弾
 	static const int magazine_ = 10;
-	//Beam* beams_[magazine_] = {};
 	std::vector<Beam*> beam_;
 	// 敵
 	static const int remainEnemys_ = 10;
-	//Enemy* enemys_[remainEnemys_] = {};
 	std::vector<Enemy*> enemy_;
 
 	//プレイヤーライフのスプライト
