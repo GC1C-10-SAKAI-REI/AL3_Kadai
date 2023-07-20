@@ -11,12 +11,12 @@ GamePlay::~GamePlay()
 	delete stage_;  // ステージ
 	delete player_; // プレイヤー
 	// ビーム
-	for (Beam* beam : beams_)
+	for (Beam* beam : beam_)
 	{
 		delete beam;
 	}	
 	// 敵
-	for (Enemy* enemy : enemys_)
+	for (Enemy* enemy : enemy_)
 	{
 		delete enemy;
 	}
@@ -48,12 +48,16 @@ void GamePlay::Initialize(ViewProjection view)
 	// ビーム
 	for (int i = 0; i < magazine_; i++)
 	{
-		beams_[i] = new Beam();
+		Beam* tmp = new Beam();
+		tmp->Initialize(view,player_);
+		beam_.push_back(tmp);
 	}
 	// 敵(生成の際はインスタンスが出来てないので普通のfor文を使う)
 	for (int i = 0; i < remainEnemys_; i++)
 	{
-		enemys_[i] = new Enemy(); 
+		Enemy* tmp = new Enemy();
+		tmp->Initialize(view);
+		enemy_.push_back(tmp);
 	}
 
 	// 各クラスの初期化
@@ -62,12 +66,12 @@ void GamePlay::Initialize(ViewProjection view)
 	// プレイヤー
 	player_->Initialize(view_);
 	// ビーム
-	for (Beam* beam : beams_)
+	/*for (Beam* beam : beams_)
 	{
 		beam->Initialize(view_, player_);
-	}	
+	}*/
 	// 敵
-	for (Enemy* enemy : enemys_)
+	for (Enemy* enemy : enemy_)
 	{
 		enemy->Initialize(view_);
 	}
@@ -107,12 +111,12 @@ void GamePlay::Start()
 	//プレイヤー
 	player_->Start();
 	//ビーム
-	for (Beam *beam : beams_)
+	for (Beam *beam : beam_)
 	{
 		beam->Start();
 	}	
 	//敵
-	for (Enemy *enemy : enemys_)
+	for (Enemy *enemy : enemy_)
 	{
 		enemy->Start();
 	}
@@ -140,7 +144,7 @@ void GamePlay::Shot()
 		if (input_->PushKey(DIK_SPACE))
 		{
 			// ビームでループ
-			for (Beam* beam : beams_)
+			for (Beam* beam : beam_)
 			{
 				// 存在しなければ
 				if (beam->GetFlag() == 0)
@@ -185,12 +189,12 @@ void GamePlay::Update(Scene &scene)
 	// プレイヤー
 	player_->Update();
 	// 弾
-	for (Beam* beam : beams_)
+	for (Beam* beam : beam_)
 	{
 		beam->Update();
 	}	
 	// 敵
-	for (Enemy* enemy : enemys_)
+	for (Enemy* enemy : enemy_)
 	{
 		enemy->Update(difficultyTimer_);
 	}	
@@ -255,12 +259,12 @@ void GamePlay::Draw3D()
 		}		
 	}
 	// 弾
-	for (Beam* beam : beams_)
+	for (Beam* beam : beam_)
 	{
 		beam->Draw3D();
 	}	
 	// 敵
-	for (Enemy *enemy : enemys_)
+	for (Enemy *enemy : enemy_)
 	{
 		if (enemy->GetFlag() != 0)
 		{
@@ -278,7 +282,7 @@ void GamePlay::Draw2DNear()
 
 void GamePlay::CollisionPtoE()
 {
-	for (Enemy *enemy : enemys_)
+	for (Enemy *enemy : enemy_)
 	{
 		// 敵が存在すれば
 		if (enemy->GetFlag() == 1)
@@ -304,9 +308,9 @@ void GamePlay::CollisionPtoE()
 
 void GamePlay::CollisionBtoE()
 {
-	for (Enemy *enemy : enemys_)
+	for (Enemy *enemy : enemy_)
 	{
-		for (Beam* beam : beams_)
+		for (Beam* beam : beam_)
 		{
 			// 敵が生きていれば
 			if (enemy->GetFlag() == 1 && beam->GetFlag())
